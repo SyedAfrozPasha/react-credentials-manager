@@ -1,178 +1,79 @@
 import React, { useState } from 'react';
+import InputField from './InputField';
 
-export default function Cards({ uniqueKey, removeField }) {
+export default function Cards({ uniqueKey }) {
   const [maskInput, setMaskInput] = useState(true);
   const [enableCopy, setEnableCopy] = useState(true);
+  const [countInputField, setCountInputField] = useState(['ufa1c77q1o9']);
 
-  const togglePassword = (e, id) => {
-    e.preventDefault();
-    console.log('PASS');
-    if (maskInput) {
-      setMaskInput(false);
-    } else {
-      setMaskInput(true);
+  const addInputField = () => {
+    console.log('ADD');
+    setCountInputField([...countInputField, generatedRandomString()]);
+  };
+
+  const removeInputField = propValue => {
+    if (propValue) {
+      const inputKeys = countInputField || [];
+      let index = inputKeys.indexOf(propValue);
+      if (index !== -1) {
+        inputKeys.splice(index, 1);
+      }
+      setCountInputField([...inputKeys]);
     }
   };
 
-  const toggleCopy = (e, id) => {
-    e.preventDefault();
-    console.log('copy');
-    const data = document.getElementById(`input-${id}`).value;
-    if (data) {
-      setEnableCopy(false);
-      navigator.clipboard.writeText(data);
-      setTimeout(() => {
-        setEnableCopy(true);
-      }, 3000);
-    }
+  const generatedRandomString = (len = 36) => {
+    return Math.random()
+      .toString(len)
+      .slice(2);
   };
 
-  const deleteInputField = (e, id) => {
-    e.preventDefault();
-    removeField(id);
-  };
   return (
-    <div className="w-full px-3 mb-4">
-      <div className="flex flex-wrap justify-between">
+    <div className="box border rounded flex flex-col shadow bg-white">
+      <div className="bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
         <input
-          className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 focus:outline-none"
-          placeholder="Field Name"
+          className="appearance-none block w-2/3 text-gray-700 rounded py-2 font-medium leading-tight focus:outline-none"
+          id={`card-title-${uniqueKey}`}
+          type="text"
+          placeholder="Card Title"
         />
-        <span
-          title="Delete"
-          className="text-gray-600 cursor-pointer"
-          id={`delete-${uniqueKey}`}
-          onClick={e => deleteInputField(e, uniqueKey)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <span className="relative inline-flex rounded-md shadow-sm">
+          <button
+            title="Add Input Field"
+            className="p-0 w-8 h-8 bg-gray-600 rounded-full hover:bg-gray-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+            onClick={addInputField}
           >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="15" y1="9" x2="9" y2="15" />
-            <line x1="9" y1="9" x2="15" y2="15" />
-          </svg>
+            <svg
+              viewBox="0 0 20 20"
+              enableBackground="new 0 0 20 20"
+              className="w-6 h-6 inline-block"
+            >
+              <path
+                fill="#FFFFFF"
+                d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+                                    C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+                                    C15.952,9,16,9.447,16,10z"
+              />
+            </svg>
+          </button>
         </span>
       </div>
-
-      <div className="relative w-full">
-        <div
-          className="absolute inset-y-0 right-0 flex items-center px-2"
-          onClick={e => toggleCopy(e, uniqueKey)}
-        >
-          <input
-            className="hidden"
-            id={`copy-toggle-${uniqueKey}`}
-            name={`copy-input-${uniqueKey}`}
-            type="checkbox"
-          />
-          <label
-            className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
-            htmlFor={`copy-toggle-${uniqueKey}`}
-            title={enableCopy ? 'Copy' : 'Copied'}
-          >
-            {enableCopy && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-            )}
-
-            {!enableCopy && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            )}
-          </label>
-        </div>
-        <div
-          className="absolute inset-y-0 right-0 flex items-center px-2 mr-10"
-          onClick={e => togglePassword(e, uniqueKey)}
-        >
-          <input
-            className="hidden password-toggle"
-            id="password-toggle"
-            type="checkbox"
-            value={maskInput}
-          />
-          <label
-            className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
-            htmlFor="password-toggle"
-            name="password-input"
-            title={maskInput ? 'Show' : 'Hide'}
-          >
-            {maskInput && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            )}
-
-            {!maskInput && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                <line x1="1" y1="1" x2="23" y2="23" />
-              </svg>
-            )}
-          </label>
-        </div>
-        <input
-          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id={`input-${uniqueKey}`}
-          type={maskInput ? 'password' : 'text'}
-          placeholder="Password, etc."
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck={false}
-        />
+      <div className="flex flex-wrap mt-4">
+        {countInputField && countInputField.length > 0 ? (
+          countInputField.map(val => {
+            return (
+              <InputField
+                key={val}
+                uniqueKey={val}
+                removeField={removeInputField}
+              />
+            );
+          })
+        ) : (
+          <div className="w-full text-center tracking-wide text-gray-500 font-bold mb-4 focus:outline-none">
+            Add input field by clicking on `+` button
+          </div>
+        )}
       </div>
     </div>
   );
