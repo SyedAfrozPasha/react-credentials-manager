@@ -20,7 +20,7 @@ export default function HeroSection({
       <p className="text-gray-700 text-lg mb-4">{description1}</p>
       <p className="text-gray-700 text-lg mb-8">{description2}</p>
 
-      <div className="flex flex-wrap justify-center space-x-2">
+      {/* <div className="flex flex-wrap justify-center space-x-2">
         <button
           role="button"
           data-nav="tool-start"
@@ -37,7 +37,7 @@ export default function HeroSection({
         >
           Get Started
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }
