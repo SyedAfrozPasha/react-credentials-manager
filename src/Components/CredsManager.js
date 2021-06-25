@@ -9,10 +9,23 @@ export default function CredsManager() {
   const [isSampleExample, setIsSampleExample] = useState(false);
   const [countInputField, setCountInputField] = useState(['ufa1c77q1o9']);
   const [countCards, setCountCards] = useState([
-    ['nr91u9up0uo', '54h4neik8a', 'aap6grcf6uo'],
-    ['nr91u9up0u1', '54h4neik82', 'aap6grcf6u3']
+    // ['nr91u9up0uo', '54h4neik8a', 'aap6grcf6uo'],
+    // ['nr91u9up0u1', '54h4neik82', 'aap6grcf6u3']
+    'nr91u9up0u1',
+    '54h4neik82',
+    'aap6grcf6u3',
+    'nr91u9up0uo'
+    // '54h4neik8a',
+    // 'aap6grcf6uo'
   ]);
   //'ufa1c77q1o9'
+
+  const [data, setData] = useData({
+    nr91u9up0u1: [{}],
+    '54h4neik82': [],
+    aap6grcf6u3: [],
+    nr91u9up0uo: []
+  });
 
   const isObjectEmpty = obj => {
     return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -103,6 +116,16 @@ export default function CredsManager() {
       />
 
       <div id="tool-start" className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {countCards &&
+            countCards.length > 0 &&
+            countCards.map((item, i) => {
+              return <Card key={item} uniqueKey={item} />;
+            })}
+        </div>
+      </div>
+
+      {/* <div id="tool-start" className="p-8">
         {countCards &&
           countCards.length > 0 &&
           countCards.map((subItem, i) => {
@@ -131,7 +154,7 @@ export default function CredsManager() {
               </div>
             );
           })}
-      </div>
+      </div> */}
 
       <div className="h-full">
         <div
