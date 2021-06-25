@@ -20,7 +20,7 @@ export default function CredsManager() {
   ]);
   //'ufa1c77q1o9'
 
-  const [data, setData] = useData({
+  const [data, setData] = useState({
     nr91u9up0u1: [{}],
     '54h4neik82': [],
     aap6grcf6u3: [],
