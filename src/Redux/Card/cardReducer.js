@@ -8,7 +8,7 @@ const generatedRandomString = (len = 36) => {
 
 const removeCardLogic = (state, action) => {
   if (action && action.payload && action.payload) {
-    const cardState = state;
+    const cardState = { ...state };
     delete cardState[action.payload];
     return cardState;
   }
