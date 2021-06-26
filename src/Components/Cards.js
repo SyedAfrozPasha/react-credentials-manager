@@ -1,14 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import InputField from './InputField';
 import { CardContext } from '../App';
+import useDebounce from '../Hooks/useDebounce';
 
 export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
-  const cardName =
+  const [cardName, setCardName] = useState(
     cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
       ? cardData[0].cardName
-      : '';
+      : ''
+  );
+
+  const debouncedTitle = useDebounce(cardName, 500);
+
+  useEffect(() => {
+    console.log('debouncedTitle:', debouncedTitle);
+    cardContext.cardDispatch({
+      type: 'UPDATE_CARD',
+      payload: { cardID, cardName: debouncedTitle }
+    });
+  }, [debouncedTitle]);
+
+  // useEffect(() => {
+  //   cardContext.cardDispatch({
+  //     type: 'UPDATE_CARD',
+  //     payload: { cardID, cardName }
+  //   });
+  // }, [cardName]);
 
   const removeCard = () => {
     console.log('REMOVE_CARD__:', cardID);
@@ -17,6 +36,11 @@ export default function Cards({ cardID }) {
       payload: cardID
     });
     console.log('cardContext.cardState:', cardContext.cardState);
+  };
+
+  const updateCardName = event => {
+    console.log('UPDATE_CARD');
+    setCardName(event.target.value);
   };
 
   const addInputField = () => {
@@ -49,7 +73,8 @@ export default function Cards({ cardID }) {
           // id={`card-title-${uniqueKey}`}
           type="text"
           placeholder="Card Title"
-          value={cardName}
+          value={cardName || ''}
+          onChange={updateCardName}
         />
         <span className="relative inline-flex rounded-md shadow-sm">
           <button
@@ -101,9 +126,9 @@ export default function Cards({ cardID }) {
             return (
               <InputField
                 key={val.fieldID}
-                uniqueKey={val.fieldID}
+                cardID={cardID}
                 fieldData={val}
-                removeField={removeInputField}
+                uniqueKey={val.fieldID}
               />
             );
           })

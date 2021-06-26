@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CardContext } from '../App';
 
-export default function InputField({ uniqueKey, removeField, fieldData }) {
+export default function InputField({ cardID, uniqueKey, fieldData }) {
   const [maskInput, setMaskInput] = useState(true);
   const [enableCopy, setEnableCopy] = useState(true);
+  // const [fieldData, setFieldData] = useState({});
+
+  const cardContext = useContext(CardContext);
+  // let fieldData = null;
+  // cardContext.cardState
+  // if (
+  //   cardID &&
+  //   fieldID &&
+  //   cardContext.cardState &&
+  //   cardContext.cardState[cardID]
+  // ) {
+  //   setFieldData();
+  // }
 
   const togglePassword = (e, id) => {
     e.preventDefault();
