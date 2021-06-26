@@ -1,6 +1,7 @@
 import React, { useReducer, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './style.css';
+// import 'tippy.js/dist/tippy.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
