@@ -23,6 +23,7 @@ export default function CredsManager() {
   //'ufa1c77q1o9'
 
   const cardContext = useContext(CardContext);
+  const cardState = cardContext.cardState;
 
   console.log('#cardContext:', cardContext);
 
@@ -161,11 +162,10 @@ export default function CredsManager() {
 
       <div id="tool-start" className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {data &&
-            Object.keys(data).length > 0 &&
-            Object.keys(data).map((item, i) => {
-              console.log(item);
-              return <Card key={item} uniqueKey={item} cardData={data[item]} />;
+          {cardState &&
+            Object.keys(cardState).length > 0 &&
+            Object.keys(cardState).map((item, i) => {
+              return <Card key={item} />;
             })}
         </div>
       </div>
