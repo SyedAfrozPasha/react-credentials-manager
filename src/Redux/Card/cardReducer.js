@@ -59,6 +59,28 @@ const updateCardLogic = (state, action) => {
 //   return state;
 // };
 
+const removeInputField = (state, action) => {
+  if (action && action.payload) {
+    const cardState = { ...state };
+    const fieldData = cardState[action.payload.cardID];
+
+    if (fieldData && fieldData.length > 0) {
+      fieldData.splice(
+        fieldData.findIndex(v => v.fieldID === action.payload.fieldID),
+        1
+      );
+
+      cardState[action.payload.cardID] = fieldData;
+
+      return cardState;
+    }
+
+    return state;
+  }
+
+  return state;
+};
+
 const cardReducer = (state, action) => {
   // console.log('cardReducer - state:', state);
   // console.log('cardReducer - action:', action);
@@ -99,7 +121,7 @@ const cardReducer = (state, action) => {
       };
 
     case REMOVE_INPUT_FIELD:
-      return removeCardLogic(state, action);
+      return removeInputField(state, action);
 
     case UPDATE_INPUT_FIELD:
       return updateCardLogic(state, action);

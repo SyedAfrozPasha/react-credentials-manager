@@ -41,9 +41,16 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
     }
   };
 
-  const deleteInputField = (e, id) => {
+  const deleteInputField = e => {
     e.preventDefault();
-    removeField(id);
+    console.log('REMOVE_INPUT_FIELD');
+    cardContext.cardDispatch({
+      type: 'REMOVE_INPUT_FIELD',
+      payload: {
+        cardID,
+        fieldID: fieldData.fieldID
+      }
+    });
   };
   return (
     <div className="w-full px-3 mb-4">
@@ -57,7 +64,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
           title="Delete this Field"
           className="text-gray-600 cursor-pointer hover:text-red-700"
           id={`delete-${uniqueKey}`}
-          onClick={e => deleteInputField(e, uniqueKey)}
+          onClick={deleteInputField}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
