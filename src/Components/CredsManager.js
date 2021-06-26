@@ -1,66 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import HeroSection from './HeroSection';
 import Card from './Cards';
 import AddCardButton from './AddCardButton';
 import { CardContext } from '../App';
 
 export default function CredsManager() {
-  const [inputData, setInputData] = useState();
-  const [outputData, setOutputData] = useState();
-  const [config, setConfig] = useState({});
-  const [isSampleExample, setIsSampleExample] = useState(false);
-  const [countInputField, setCountInputField] = useState(['ufa1c77q1o9']);
-  const [countCards, setCountCards] = useState([
-    // ['nr91u9up0uo', '54h4neik8a', 'aap6grcf6uo'],
-    // ['nr91u9up0u1', '54h4neik82', 'aap6grcf6u3']
-    'nr91u9up0u1',
-    '54h4neik82',
-    'aap6grcf6u3',
-    'nr91u9up0uo'
-    // '54h4neik8a',
-    // 'aap6grcf6uo'
-  ]);
-  //'ufa1c77q1o9'
-
   const cardContext = useContext(CardContext);
   const cardState = cardContext.cardState;
 
   console.log('#cardContext:', cardContext);
-
-  const [data, setData] = useState({
-    nr91u9up0u1: [
-      {
-        fieldID: 'ufa1c77q1o9',
-        fieldName: 'USER NAME',
-        cardName: 'Amazon',
-        fieldValue: 'Test@123'
-      }
-    ],
-    '54h4neik82': [
-      {
-        fieldID: 'ufa1c77q1o8',
-        fieldName: 'PASSWORD',
-        cardName: 'GitHub',
-        fieldValue: 'Test@123'
-      }
-    ],
-    aap6grcf6u3: [
-      {
-        fieldID: 'ufa1c77q1o7',
-        fieldName: 'USER NAME',
-        cardName: 'Flipkart',
-        fieldValue: 'Test@123'
-      }
-    ],
-    nr91u9up0uo: [
-      {
-        fieldID: 'ufa1c77q1o6',
-        fieldName: 'USER NAME',
-        cardName: 'StackBliz',
-        fieldValue: 'Test@123'
-      }
-    ]
-  });
 
   const isObjectEmpty = obj => {
     return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -150,16 +98,6 @@ export default function CredsManager() {
         getNavigation={navigateToTool}
       />
 
-      {/* <div id="tool-start" className="p-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {countCards &&
-            countCards.length > 0 &&
-            countCards.map((item, i) => {
-              return <Card key={item} uniqueKey={item} />;
-            })}
-        </div>
-      </div> */}
-
       <div id="tool-start" className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cardState &&
@@ -173,37 +111,4 @@ export default function CredsManager() {
       <AddCardButton />
     </div>
   );
-}
-
-{
-  /* <div id="tool-start" className="p-8">
-        {countCards &&
-          countCards.length > 0 &&
-          countCards.map((subItem, i) => {
-            return (
-              <div
-                key={generatedRandomString()}
-                className={`row sm:flex ${i !== 0 ? 'mt-8' : ''}`}
-              >
-                {subItem &&
-                  subItem.length > 0 &&
-                  subItem.map((item, j) => {
-                    return (
-                      <div
-                        key={generatedRandomString()}
-                        className={`col sm:w-1/2 ${
-                          j % 3 !== 0 ? 'mt-8 sm:ml-8 sm:mt-0' : ''
-                        }`}
-                      >
-                        <Card
-                          key={generatedRandomString()}
-                          uniqueKey={generatedRandomString()}
-                        />
-                      </div>
-                    );
-                  })}
-              </div>
-            );
-          })}
-      </div> */
 }
