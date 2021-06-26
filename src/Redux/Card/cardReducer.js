@@ -110,7 +110,14 @@ const cardReducer = (state, action) => {
     case ADD_CARD:
       return {
         ...state,
-        [action.payload]: []
+        [action.payload]: [
+          {
+            fieldID: generatedRandomString(),
+            fieldName: '',
+            cardName: '',
+            fieldValue: ''
+          }
+        ]
       };
 
     case REMOVE_CARD:
