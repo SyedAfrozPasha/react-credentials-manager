@@ -1,22 +1,34 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CardContext } from '../App';
+import useDebounce from '../Hooks/useDebounce';
 
 export default function InputField({ cardID, uniqueKey, fieldData }) {
   const [maskInput, setMaskInput] = useState(true);
   const [enableCopy, setEnableCopy] = useState(true);
-  // const [fieldData, setFieldData] = useState({});
+  const [fieldValue, setFieldValue] = useState(fieldData.fieldValue || '');
+  const [fieldName, setFieldName] = useState(fieldData.fieldName || '');
 
   const cardContext = useContext(CardContext);
-  // let fieldData = null;
-  // cardContext.cardState
-  // if (
-  //   cardID &&
-  //   fieldID &&
-  //   cardContext.cardState &&
-  //   cardContext.cardState[cardID]
-  // ) {
-  //   setFieldData();
-  // }
+
+  const debouncedFieldValue = useDebounce(fieldValue, 500);
+
+  useEffect(() => {
+    console.log('debouncedFieldValue:', debouncedFieldValue);
+    cardContext.cardDispatch({
+      type: 'UPDATE_INPUT_FIELD',
+      payload: { cardID, fieldValue }
+    });
+  }, [debouncedFieldValue]);
+
+  const debouncedFieldName = useDebounce(fieldName, 500);
+
+  useEffect(() => {
+    console.log('debouncedFieldName:', debouncedFieldName);
+    cardContext.cardDispatch({
+      type: 'UPDATE_INPUT_FIELD',
+      payload: { cardID, fieldValue }
+    });
+  }, [debouncedFieldName]);
 
   const togglePassword = (e, id) => {
     e.preventDefault();
@@ -52,13 +64,25 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
       }
     });
   };
+
+  const updateFieldValue = event => {
+    console.log('UPDATE_INPUT');
+    setFieldValue(event.target.value);
+  };
+
+  const updateFieldName = event => {
+    console.log('UPDATE_INPUT');
+    setFieldName(event.target.value);
+  };
+
   return (
     <div className="w-full px-3 mb-4">
       <div className="flex flex-wrap justify-between">
         <input
           className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 focus:outline-none"
           placeholder="Field Name"
-          value={fieldData.fieldName}
+          value={fieldName}
+          onChange={updateFieldName}
         />
         <span
           title="Delete this Field"
@@ -194,7 +218,8 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
-          value={fieldData.fieldValue}
+          value={fieldValue}
+          onChange={updateFieldValue}
         />
       </div>
     </div>

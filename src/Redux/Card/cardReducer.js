@@ -81,6 +81,29 @@ const removeInputField = (state, action) => {
   return state;
 };
 
+const updateInputField = (state, action) => {
+  if (action && action.payload) {
+    const cardState = { ...state };
+    const fieldData = cardState[action.payload.cardID];
+    if (fieldData && fieldData.length > 0) {
+      const cardObj = fieldData.map(field => {
+        return {
+          ...field,
+          cardName: action.payload.cardName
+        };
+      });
+
+      return {
+        ...cardState,
+        [action.payload.cardID]: cardObj
+      };
+    }
+    return cardState;
+  }
+
+  return state;
+};
+
 const cardReducer = (state, action) => {
   // console.log('cardReducer - state:', state);
   // console.log('cardReducer - action:', action);
@@ -124,7 +147,7 @@ const cardReducer = (state, action) => {
       return removeInputField(state, action);
 
     case UPDATE_INPUT_FIELD:
-      return updateCardLogic(state, action);
+      return updateInputField(state, action);
 
     default:
       return state;
