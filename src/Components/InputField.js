@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function InputField({ uniqueKey, removeField }) {
+export default function InputField({ uniqueKey, removeField, fieldData }) {
   const [maskInput, setMaskInput] = useState(true);
   const [enableCopy, setEnableCopy] = useState(true);
 
@@ -37,6 +37,7 @@ export default function InputField({ uniqueKey, removeField }) {
         <input
           className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 focus:outline-none"
           placeholder="Field Name"
+          value={fieldData.fieldName}
         />
         <span
           title="Delete this Field"
@@ -172,6 +173,7 @@ export default function InputField({ uniqueKey, removeField }) {
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
+          value={fieldData.fieldValue}
         />
       </div>
     </div>

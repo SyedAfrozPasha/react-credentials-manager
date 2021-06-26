@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputField from './InputField';
 
-export default function Cards({ uniqueKey }) {
+export default function Cards({ uniqueKey, cardData }) {
   const [maskInput, setMaskInput] = useState(true);
   const [enableCopy, setEnableCopy] = useState(true);
   const [countInputField, setCountInputField] = useState(['ufa1c77q1o9']);
@@ -36,6 +36,7 @@ export default function Cards({ uniqueKey }) {
           id={`card-title-${uniqueKey}`}
           type="text"
           placeholder="Card Title"
+          value={cardData[0].cardName || ''}
         />
         <span className="relative inline-flex rounded-md shadow-sm">
           <button
@@ -59,12 +60,13 @@ export default function Cards({ uniqueKey }) {
         </span>
       </div>
       <div className="flex flex-wrap mt-4">
-        {countInputField && countInputField.length > 0 ? (
-          countInputField.map(val => {
+        {cardData && cardData.length > 0 ? (
+          cardData.map(val => {
             return (
               <InputField
-                key={val}
-                uniqueKey={val}
+                key={val.fieldID}
+                uniqueKey={val.fieldID}
+                fieldData={val}
                 removeField={removeInputField}
               />
             );

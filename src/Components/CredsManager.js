@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import HeroSection from './HeroSection';
 import Card from './Cards';
+import AddCardButton from './AddCardButton';
+import { CardContext } from '../App';
 
 export default function CredsManager() {
   const [inputData, setInputData] = useState();
@@ -20,11 +22,43 @@ export default function CredsManager() {
   ]);
   //'ufa1c77q1o9'
 
+  const cardContext = useContext(CardContext);
+
+  console.log('#cardContext:', cardContext);
+
   const [data, setData] = useState({
-    nr91u9up0u1: [{}],
-    '54h4neik82': [],
-    aap6grcf6u3: [],
-    nr91u9up0uo: []
+    nr91u9up0u1: [
+      {
+        fieldID: 'ufa1c77q1o9',
+        fieldName: 'USER NAME',
+        cardName: 'Amazon',
+        fieldValue: 'Test@123'
+      }
+    ],
+    '54h4neik82': [
+      {
+        fieldID: 'ufa1c77q1o8',
+        fieldName: 'PASSWORD',
+        cardName: 'GitHub',
+        fieldValue: 'Test@123'
+      }
+    ],
+    aap6grcf6u3: [
+      {
+        fieldID: 'ufa1c77q1o7',
+        fieldName: 'USER NAME',
+        cardName: 'Flipkart',
+        fieldValue: 'Test@123'
+      }
+    ],
+    nr91u9up0uo: [
+      {
+        fieldID: 'ufa1c77q1o6',
+        fieldName: 'USER NAME',
+        cardName: 'StackBliz',
+        fieldValue: 'Test@123'
+      }
+    ]
   });
 
   const isObjectEmpty = obj => {
@@ -115,7 +149,7 @@ export default function CredsManager() {
         getNavigation={navigateToTool}
       />
 
-      <div id="tool-start" className="p-8">
+      {/* <div id="tool-start" className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {countCards &&
             countCards.length > 0 &&
@@ -123,9 +157,26 @@ export default function CredsManager() {
               return <Card key={item} uniqueKey={item} />;
             })}
         </div>
+      </div> */}
+
+      <div id="tool-start" className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {data &&
+            Object.keys(data).length > 0 &&
+            Object.keys(data).map((item, i) => {
+              console.log(item);
+              return <Card key={item} uniqueKey={item} cardData={data[item]} />;
+            })}
+        </div>
       </div>
 
-      {/* <div id="tool-start" className="p-8">
+      <AddCardButton />
+    </div>
+  );
+}
+
+{
+  /* <div id="tool-start" className="p-8">
         {countCards &&
           countCards.length > 0 &&
           countCards.map((subItem, i) => {
@@ -154,33 +205,5 @@ export default function CredsManager() {
               </div>
             );
           })}
-      </div> */}
-
-      <div className="h-full">
-        <div
-          className="fixed bottom-0 right-0 w-16 h-16 mr-4 mb-12"
-          id="box_btn"
-        >
-          <button
-            className="p-0 w-12 h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
-            title="Add Card"
-            onClick={addCards}
-          >
-            <svg
-              viewBox="0 0 20 20"
-              enableBackground="new 0 0 20 20"
-              className="w-6 h-6 inline-block"
-            >
-              <path
-                fill="#FFFFFF"
-                d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
-                                    C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
-                                    C15.952,9,16,9.447,16,10z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+      </div> */
 }
