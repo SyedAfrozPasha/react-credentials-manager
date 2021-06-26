@@ -55,7 +55,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
         />
         <span
           title="Delete this Field"
-          className="text-gray-600 cursor-pointer"
+          className="text-gray-600 cursor-pointer hover:text-red-700"
           id={`delete-${uniqueKey}`}
           onClick={e => deleteInputField(e, uniqueKey)}
         >

@@ -7,8 +7,6 @@ import Footer from './Components/Footer';
 
 import cardReducer from './Redux/Card/cardReducer';
 
-console.log('cardReducer:::', cardReducer);
-
 const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 
 export const CardContext = React.createContext();

@@ -6,6 +6,9 @@ import useDebounce from '../Hooks/useDebounce';
 export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
+  console.log('###########################');
+  console.log('cardData:', cardData);
+  console.log('###########################');
   const [cardName, setCardName] = useState(
     cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
       ? cardData[0].cardName
@@ -44,8 +47,11 @@ export default function Cards({ cardID }) {
   };
 
   const addInputField = () => {
-    console.log('ADD');
-    setCountInputField([...countInputField, generatedRandomString()]);
+    console.log('ADD FIELD');
+    cardContext.cardDispatch({
+      type: 'ADD_INPUT_FIELD',
+      payload: { cardID, cardName }
+    });
   };
 
   const removeInputField = propValue => {
@@ -121,8 +127,8 @@ export default function Cards({ cardID }) {
         </span>
       </div>
       <div className="flex flex-wrap mt-4">
-        {cardData && cardData.length > 0 ? (
-          cardData.map(val => {
+        {cardData && cardData[cardID] && cardData[cardID].length > 0 ? (
+          cardData[cardID].map(val => {
             return (
               <InputField
                 key={val.fieldID}
