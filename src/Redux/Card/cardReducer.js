@@ -6,12 +6,15 @@ const generatedRandomString = (len = 36) => {
     .slice(2);
 };
 
-const removeCardLogin = (state, action) => {
-  if (action && action.payload && action.payload.cardID) {
-    delete state[action.payload.cardID];
-    return state;
+const removeCardLogic = (state, action) => {
+  if (action && action.payload && action.payload) {
+    const cardState = state;
+    delete cardState[action.payload];
+    return cardState;
   }
-}
+
+  return state;
+};
 
 const cardReducer = (state, action) => {
   console.log('cardReducer - state:', state);
@@ -31,10 +34,7 @@ const cardReducer = (state, action) => {
       };
 
     case REMOVE_CARD:
-      return {
-        ...state,
-        removeCardLogin(state, action)
-      };
+      return removeCardLogic(state, action);
 
     default:
       return state;

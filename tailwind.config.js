@@ -1,10 +1,7 @@
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
-    extend: {},
-    padding: {
-      'pad-6': '6px'
-    }
+    extend: {}
   },
   variants: {
     opacity: ({ after }) => after(['disabled'])

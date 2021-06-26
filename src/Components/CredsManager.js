@@ -165,7 +165,7 @@ export default function CredsManager() {
           {cardState &&
             Object.keys(cardState).length > 0 &&
             Object.keys(cardState).map((item, i) => {
-              return <Card key={item} />;
+              return <Card key={item} cardID={item} />;
             })}
         </div>
       </div>

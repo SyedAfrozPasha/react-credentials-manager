@@ -2,13 +2,22 @@ import React, { useContext } from 'react';
 import InputField from './InputField';
 import { CardContext } from '../App';
 
-export default function Cards() {
+export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
   const cardName =
     cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
       ? cardData[0].cardName
       : '';
+
+  const removeCard = () => {
+    console.log('REMOVE_CARD__:', cardID);
+    cardContext.cardDispatch({
+      type: 'REMOVE_CARD',
+      payload: cardID
+    });
+    console.log('cardContext.cardState:', cardContext.cardState);
+  };
 
   const addInputField = () => {
     console.log('ADD');
@@ -63,8 +72,9 @@ export default function Cards() {
           </button>
           <button
             title="Delete this card"
-            className="p-0 pad-6 ml-1 w-8 h-8 bg-gray-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white"
-            onClick={addInputField}
+            className="p-0 ml-1 w-8 h-8 bg-gray-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white"
+            onClick={removeCard}
+            style={{ paddingLeft: '6px' }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
