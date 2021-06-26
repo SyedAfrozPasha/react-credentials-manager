@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import InputField from './InputField';
+import { CardContext } from '../App';
 
-export default function Cards({ uniqueKey, cardData }) {
-  const [maskInput, setMaskInput] = useState(true);
-  const [enableCopy, setEnableCopy] = useState(true);
-  const [countInputField, setCountInputField] = useState(['ufa1c77q1o9']);
+export default function Cards() {
+  const cardContext = useContext(CardContext);
+  const cardData = cardContext.cardState;
+  const cardName =
+    cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
+      ? cardData[0].cardName
+      : '';
 
   const addInputField = () => {
     console.log('ADD');
@@ -33,10 +37,10 @@ export default function Cards({ uniqueKey, cardData }) {
       <div className="bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
         <input
           className="appearance-none block w-2/3 text-gray-700 rounded py-2 font-medium leading-tight focus:outline-none"
-          id={`card-title-${uniqueKey}`}
+          // id={`card-title-${uniqueKey}`}
           type="text"
           placeholder="Card Title"
-          value={cardData[0].cardName || ''}
+          value={cardName}
         />
         <span className="relative inline-flex rounded-md shadow-sm">
           <button
