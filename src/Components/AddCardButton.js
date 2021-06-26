@@ -2,17 +2,13 @@ import React, { useContext } from 'react';
 import { CardContext } from '../App';
 
 export default function AddCardButton() {
-  // const [card, cardDispatch] = useReducer(cardReducer);
-
   const cardContext = useContext(CardContext);
 
   const addCards = () => {
-    console.log('ADDDD');
     cardContext.cardDispatch({
       type: 'ADD_CARD',
       payload: generatedRandomString()
     });
-    console.log('cardContext.cardState:', cardContext.cardState);
   };
 
   const generatedRandomString = (len = 36) => {
@@ -20,8 +16,6 @@ export default function AddCardButton() {
       .toString(len)
       .slice(2);
   };
-
-  console.log('cardContext:', cardContext);
 
   return (
     <div className="h-full">

@@ -89,7 +89,8 @@ const updateInputField = (state, action) => {
       const cardObj = fieldData.map(field => {
         return {
           ...field,
-          cardName: action.payload.cardName
+          fieldName: action.payload.fieldName,
+          fieldValue: action.payload.fieldValue
         };
       });
 
@@ -105,20 +106,11 @@ const updateInputField = (state, action) => {
 };
 
 const cardReducer = (state, action) => {
-  // console.log('cardReducer - state:', state);
-  // console.log('cardReducer - action:', action);
   switch (action.type) {
     case ADD_CARD:
       return {
         ...state,
-        [action.payload]: [
-          // {
-          //   fieldID: generatedRandomString(),
-          //   fieldName: '',
-          //   cardName: '',
-          //   fieldValue: ''
-          // }
-        ]
+        [action.payload]: []
       };
 
     case REMOVE_CARD:

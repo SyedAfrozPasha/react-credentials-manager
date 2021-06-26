@@ -13,7 +13,6 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
   const debouncedFieldValue = useDebounce(fieldValue, 500);
 
   useEffect(() => {
-    console.log('debouncedFieldValue:', debouncedFieldValue);
     cardContext.cardDispatch({
       type: 'UPDATE_INPUT_FIELD',
       payload: { cardID, fieldValue }
@@ -23,7 +22,6 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
   const debouncedFieldName = useDebounce(fieldName, 500);
 
   useEffect(() => {
-    console.log('debouncedFieldName:', debouncedFieldName);
     cardContext.cardDispatch({
       type: 'UPDATE_INPUT_FIELD',
       payload: { cardID, fieldValue }
@@ -32,7 +30,6 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
 
   const togglePassword = (e, id) => {
     e.preventDefault();
-    console.log('PASS');
     if (maskInput) {
       setMaskInput(false);
     } else {
@@ -42,7 +39,6 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
 
   const toggleCopy = (e, id) => {
     e.preventDefault();
-    console.log('copy');
     const data = document.getElementById(`input-${id}`).value;
     if (data) {
       setEnableCopy(false);
@@ -55,7 +51,6 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
 
   const deleteInputField = e => {
     e.preventDefault();
-    console.log('REMOVE_INPUT_FIELD');
     cardContext.cardDispatch({
       type: 'REMOVE_INPUT_FIELD',
       payload: {
@@ -66,12 +61,10 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
   };
 
   const updateFieldValue = event => {
-    console.log('UPDATE_INPUT');
     setFieldValue(event.target.value);
   };
 
   const updateFieldName = event => {
-    console.log('UPDATE_INPUT');
     setFieldName(event.target.value);
   };
 

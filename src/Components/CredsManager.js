@@ -8,12 +8,6 @@ export default function CredsManager() {
   const cardContext = useContext(CardContext);
   const cardState = cardContext.cardState;
 
-  console.log('#cardContext:', cardContext);
-
-  const isObjectEmpty = obj => {
-    return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
-  };
-
   // const navigateToTool = propEvent => {
   //   let navigate =
   //     propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
@@ -50,44 +44,6 @@ export default function CredsManager() {
   //     }, 0);
   //   }
   // };
-
-  // NEED TO MODIFY
-  const addCards = () => {
-    console.log('ADD CARDS');
-    const cardKey = generatedRandomString();
-    const cardList = countCards;
-    if (cardList && cardList.length > 0) {
-      cardList.map(item => {
-        if (item && item.length > 0 && item.length < 3) {
-        } else {
-        }
-      });
-    } else {
-      setCountCards([...cardList, [cardKey]]);
-    }
-  };
-
-  const addInputField = () => {
-    console.log('ADD');
-    setCountInputField([...countInputField, generatedRandomString()]);
-  };
-
-  const removeInputField = propValue => {
-    if (propValue) {
-      const inputKeys = countInputField || [];
-      let index = inputKeys.indexOf(propValue);
-      if (index !== -1) {
-        inputKeys.splice(index, 1);
-      }
-      setCountInputField([...inputKeys]);
-    }
-  };
-
-  const generatedRandomString = (len = 36) => {
-    return Math.random()
-      .toString(len)
-      .slice(2);
-  };
 
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">

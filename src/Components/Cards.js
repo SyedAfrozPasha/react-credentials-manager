@@ -6,9 +6,6 @@ import useDebounce from '../Hooks/useDebounce';
 export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
-  console.log('###########################');
-  console.log('cardData:', cardData);
-  console.log('###########################');
   const [cardName, setCardName] = useState(
     cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
       ? cardData[0].cardName
@@ -18,57 +15,28 @@ export default function Cards({ cardID }) {
   const debouncedTitle = useDebounce(cardName, 500);
 
   useEffect(() => {
-    console.log('debouncedTitle:', debouncedTitle);
     cardContext.cardDispatch({
       type: 'UPDATE_CARD',
       payload: { cardID, cardName: debouncedTitle }
     });
   }, [debouncedTitle]);
 
-  // useEffect(() => {
-  //   cardContext.cardDispatch({
-  //     type: 'UPDATE_CARD',
-  //     payload: { cardID, cardName }
-  //   });
-  // }, [cardName]);
-
   const removeCard = () => {
-    console.log('REMOVE_CARD__:', cardID);
     cardContext.cardDispatch({
       type: 'REMOVE_CARD',
       payload: cardID
     });
-    console.log('cardContext.cardState:', cardContext.cardState);
   };
 
   const updateCardName = event => {
-    console.log('UPDATE_CARD');
     setCardName(event.target.value);
   };
 
   const addInputField = () => {
-    console.log('ADD FIELD');
     cardContext.cardDispatch({
       type: 'ADD_INPUT_FIELD',
       payload: { cardID, cardName }
     });
-  };
-
-  const removeInputField = propValue => {
-    if (propValue) {
-      const inputKeys = countInputField || [];
-      let index = inputKeys.indexOf(propValue);
-      if (index !== -1) {
-        inputKeys.splice(index, 1);
-      }
-      setCountInputField([...inputKeys]);
-    }
-  };
-
-  const generatedRandomString = (len = 36) => {
-    return Math.random()
-      .toString(len)
-      .slice(2);
   };
 
   return (
@@ -76,7 +44,7 @@ export default function Cards({ cardID }) {
       <div className="bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
         <input
           className="appearance-none block w-2/3 text-gray-700 rounded py-2 font-medium leading-tight focus:outline-none"
-          // id={`card-title-${uniqueKey}`}
+          id={`card-title-${cardID}`}
           type="text"
           placeholder="Card Title"
           value={cardName || ''}

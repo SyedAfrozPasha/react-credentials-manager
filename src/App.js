@@ -14,8 +14,6 @@ export const CardContext = React.createContext();
 export default function App() {
   const [cardState, cardDispatch] = useReducer(cardReducer, {});
 
-  console.log('cardState - APP:', cardState);
-
   return (
     <CardContext.Provider
       value={{
