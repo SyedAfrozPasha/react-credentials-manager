@@ -48,7 +48,7 @@ export default function CredsManager() {
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
       <HeroSection
-        title="Kreman"
+        title="Kreman - Simple Credential Manager"
         description1="A simple credential managing tool to manage the sensitive data such as passwords, card details, login details etc."
         description2=""
         // getNavigation={navigateToTool}
