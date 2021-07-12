@@ -56,66 +56,71 @@ export default function CredsManager() {
 
       <div id="tool-start" className="p-8">
         <div className="flex flex-row-reverse mb-8">
-          <div class="dropdown inline-block relative">
-            <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-              <span class="mr-1">Dropdown</span>
+          <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center ml-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Export</span>
+          </button>
+          <div className="dropdown hover:block inline-block relative ml-2">
+            <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
               <svg
-                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mr-2"
+              >
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+              </svg>
+              <span className="mr-1">Save As</span>
+              <svg
+                className="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{' '}
               </svg>
             </button>
-            <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-              <li class="">
+            <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-10">
+              <li className="">
                 <a
-                  class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                  className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                   href="#"
                 >
-                  One
+                  Encrypted Text
                 </a>
               </li>
-              <li class="">
+              <li className="">
                 <a
-                  class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                  className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                   href="#"
                 >
-                  Two
-                </a>
-              </li>
-              <li class="">
-                <a
-                  class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                  href="#"
-                >
-                  Three is the magic number
+                  Plain Text
                 </a>
               </li>
             </ul>
           </div>
-
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-            <svg
-              className="fill-current w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-            </svg>
-            <span>Export</span>
-          </button>
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mr-2">
-            <svg
-              className="fill-current w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              transform="scale(1, -1) translate(0, 0)"
-            >
-              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-            </svg>
-            <span>Save</span>
-          </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cardState &&
