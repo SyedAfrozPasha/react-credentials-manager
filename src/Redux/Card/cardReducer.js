@@ -107,8 +107,13 @@ const updateInputField = (state, action) => {
   return state;
 };
 
-export const initializer = (initialValue = {}) =>
-  JSON.parse(localStorage.getItem('data')) || initialValue;
+export const initializer = (initialValue = {}) => {
+  try {
+    return JSON.parse(localStorage.getItem('data')) || initialValue;
+  } catch (err) {
+    return initialValue;
+  }
+};
 
 export const cardReducer = (state, action) => {
   switch (action.type) {
