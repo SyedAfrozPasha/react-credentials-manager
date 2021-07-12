@@ -3,8 +3,8 @@ import Tippy from '@tippyjs/react';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
 
-export default function InputField({ cardID, uniqueKey, fieldData }) {
-  const [maskInput, setMaskInput] = useState(true);
+export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
+  const [maskInput, setMaskInput] = useState(fieldData.isMasked || false);
   const [enableCopy, setEnableCopy] = useState(true);
   const [fieldValue, setFieldValue] = useState(fieldData.fieldValue || '');
   const [fieldName, setFieldName] = useState(fieldData.fieldName || '');
@@ -16,7 +16,13 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
   useEffect(() => {
     cardContext.cardDispatch({
       type: 'UPDATE_INPUT_FIELD',
-      payload: { cardID, fieldValue }
+      payload: {
+        cardID,
+        fieldValue,
+        fieldName,
+        // cardName,
+        isMasked: maskInput
+      }
     });
   }, [debouncedFieldValue]);
 
@@ -25,9 +31,28 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
   useEffect(() => {
     cardContext.cardDispatch({
       type: 'UPDATE_INPUT_FIELD',
-      payload: { cardID, fieldValue }
+      payload: {
+        cardID,
+        fieldValue,
+        fieldName,
+        // cardName,
+        isMasked: maskInput
+      }
     });
   }, [debouncedFieldName]);
+
+  useEffect(() => {
+    cardContext.cardDispatch({
+      type: 'UPDATE_INPUT_FIELD',
+      payload: {
+        cardID,
+        fieldValue,
+        fieldName,
+        // cardName,
+        isMasked: maskInput
+      }
+    });
+  }, [maskInput]);
 
   const togglePassword = (e, id) => {
     e.preventDefault();

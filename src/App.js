@@ -1,4 +1,4 @@
-import React, { useReducer, Suspense } from 'react';
+import React, { useReducer, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './style.css';
 // import 'tippy.js/dist/tippy.css';
@@ -6,14 +6,18 @@ import './style.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 
-import cardReducer from './Redux/Card/cardReducer';
+import { cardReducer, initializer } from './Redux/Card/cardReducer';
 
 const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 
 export const CardContext = React.createContext();
 
 export default function App() {
-  const [cardState, cardDispatch] = useReducer(cardReducer, {});
+  const [cardState, cardDispatch] = useReducer(cardReducer, {}, initializer);
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(cardState));
+  }, [cardState]);
 
   return (
     <CardContext.Provider

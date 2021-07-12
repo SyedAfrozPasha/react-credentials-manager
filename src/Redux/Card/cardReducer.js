@@ -90,7 +90,9 @@ const updateInputField = (state, action) => {
         return {
           ...field,
           fieldName: action.payload.fieldName,
-          fieldValue: action.payload.fieldValue
+          fieldValue: action.payload.fieldValue,
+          isMasked: action.payload.isMasked,
+          cardName: action.payload.cardName
         };
       });
 
@@ -105,7 +107,10 @@ const updateInputField = (state, action) => {
   return state;
 };
 
-const cardReducer = (state, action) => {
+export const initializer = (initialValue = {}) =>
+  JSON.parse(localStorage.getItem('data')) || initialValue;
+
+export const cardReducer = (state, action) => {
   switch (action.type) {
     case ADD_CARD:
       return {
@@ -115,7 +120,8 @@ const cardReducer = (state, action) => {
             fieldID: generatedRandomString(),
             fieldName: '',
             cardName: '',
-            fieldValue: ''
+            fieldValue: '',
+            isMasked: false
           }
         ]
       };
@@ -136,7 +142,8 @@ const cardReducer = (state, action) => {
               fieldID: generatedRandomString(),
               fieldName: '',
               cardName: action.payload.cardName || '',
-              fieldValue: ''
+              fieldValue: '',
+              isMasked: false
             }
           ]
         ]
@@ -153,4 +160,4 @@ const cardReducer = (state, action) => {
   }
 };
 
-export default cardReducer;
+// export default cardReducer;

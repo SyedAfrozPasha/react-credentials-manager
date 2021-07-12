@@ -107,6 +107,7 @@ export default function Cards({ cardID }) {
                 key={val.fieldID}
                 cardID={cardID}
                 fieldData={val}
+                cardName={debouncedTitle}
                 uniqueKey={val.fieldID}
               />
             );
