@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 import {
   ADD_CARD,
   REMOVE_CARD,
@@ -109,7 +110,15 @@ const updateInputField = (state, action) => {
 
 export const initializer = (initialValue = {}) => {
   try {
-    return JSON.parse(localStorage.getItem('data')) || initialValue;
+    if (!localStorage.getItem('data')) {
+      return initialValue;
+    }
+
+    let ciphertext = JSON.parse(localStorage.getItem('data'));
+    let bytes = CryptoJS.AES.decrypt(ciphertext, 'secretKey@123');
+    let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    return decryptedData;
+    // return JSON.parse(localStorage.getItem('data')) || initialValue;
   } catch (err) {
     return initialValue;
   }

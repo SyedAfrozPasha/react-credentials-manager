@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
 import './style.css';
+
 // import 'tippy.js/dist/tippy.css';
 
 import Header from './Components/Header';
@@ -16,7 +18,11 @@ export default function App() {
   const [cardState, cardDispatch] = useReducer(cardReducer, {}, initializer);
 
   useEffect(() => {
-    localStorage.setItem('data', JSON.stringify(cardState));
+    let ciphertext = CryptoJS.AES.encrypt(
+      JSON.stringify(cardState),
+      'secretKey@123'
+    ).toString();
+    localStorage.setItem('data', JSON.stringify(ciphertext));
   }, [cardState]);
 
   return (
