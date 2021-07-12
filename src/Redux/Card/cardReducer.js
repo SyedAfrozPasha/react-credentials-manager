@@ -91,8 +91,8 @@ const updateInputField = (state, action) => {
           ...field,
           fieldName: action.payload.fieldName,
           fieldValue: action.payload.fieldValue,
-          isMasked: action.payload.isMasked,
-          cardName: action.payload.cardName
+          isMasked: action.payload.isMasked
+          // cardName: action.payload.cardName
         };
       });
 

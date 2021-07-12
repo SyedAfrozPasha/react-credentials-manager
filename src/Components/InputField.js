@@ -20,7 +20,7 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
         cardID,
         fieldValue,
         fieldName,
-        // cardName,
+        cardName,
         isMasked: maskInput
       }
     });
@@ -35,7 +35,7 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
         cardID,
         fieldValue,
         fieldName,
-        // cardName,
+        cardName,
         isMasked: maskInput
       }
     });
@@ -48,7 +48,7 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
         cardID,
         fieldValue,
         fieldName,
-        // cardName,
+        cardName,
         isMasked: maskInput
       }
     });

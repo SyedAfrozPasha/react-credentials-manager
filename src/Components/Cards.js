@@ -8,8 +8,12 @@ export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
   const [cardName, setCardName] = useState(
-    cardData && cardData.length > 0 && cardData[0] && cardData[0].cardName
-      ? cardData[0].cardName
+    cardData &&
+      cardData[cardID] &&
+      cardData[cardID].length > 0 &&
+      cardData[cardID][0] &&
+      cardData[cardID][0].cardName
+      ? cardData[cardID][0].cardName
       : ''
   );
 
@@ -20,6 +24,7 @@ export default function Cards({ cardID }) {
       type: 'UPDATE_CARD',
       payload: { cardID, cardName: debouncedTitle }
     });
+    setCardName(debouncedTitle);
   }, [debouncedTitle]);
 
   const removeCard = () => {
@@ -107,7 +112,7 @@ export default function Cards({ cardID }) {
                 key={val.fieldID}
                 cardID={cardID}
                 fieldData={val}
-                cardName={debouncedTitle}
+                cardName={cardName}
                 uniqueKey={val.fieldID}
               />
             );
