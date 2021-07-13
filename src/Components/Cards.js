@@ -66,7 +66,7 @@ export default function Cards({ cardID }) {
 
   return (
     <div className="box border rounded flex flex-col shadow bg-white">
-      <div className="bg-grey-lighter px-3 py-2 border-b flex flex-wrap justify-between">
+      <div className="bg-gray-lighter px-3 py-2 border-b flex flex-wrap justify-between">
         <input
           className="appearance-none block w-2/3 text-gray-700 rounded py-2 font-bold leading-tight focus:outline-none"
           id={`card-title-${cardID}`}
