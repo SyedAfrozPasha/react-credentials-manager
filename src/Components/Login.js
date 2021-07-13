@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { CardContext } from '../App';
+import { AuthContext } from '../App';
 
 export default function Login() {
+  const authContext = useContext(AuthContext);
+
   const [mpassword, setMPassword] = useState();
 
   const loginInputRef = useRef(null);
