@@ -13,7 +13,7 @@ html {
 body {
   position: relative;
   margin: 0;
-  padding-bottom: 6rem;
+  /* padding-bottom: 6rem; */
   min-height: 100%;
 }
 
@@ -51,3 +51,12 @@ body {
 /* .dropdownhover:hover {
   display: block;
 } */
+
+.bg-layout {
+  background: linear-gradient(
+    60deg,
+    rgb(142, 252, 233) 10%,
+    rgb(88, 161, 230) 50%,
+    rgb(185, 147, 243) 100%
+  );
+}

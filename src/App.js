@@ -1,5 +1,10 @@
 import React, { useReducer, useEffect, Suspense } from 'react';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CryptoJS from 'crypto-js';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +20,7 @@ import useDebounce from './Hooks/useDebounce';
 import { cardReducer, initializer } from './Redux/Card/cardReducer';
 
 const CredsManager = React.lazy(() => import('./Components/CredsManager'));
+const LoginScreen = React.lazy(() => import('./Components/Login'));
 
 export const CardContext = React.createContext();
 
@@ -40,19 +46,25 @@ export default function App() {
         cardDispatch
       }}
     >
-      <div className="flex flex-col min-h-screen">
-        {/* <Router> */}
-        <Header />
+      <Router>
         <Suspense fallback={<div>Loading...</div>}>
-          {/* <Switch>
-              <Route exact path="/"> */}
-          <CredsManager />
-          {/* </Route>
-            </Switch> */}
+          <Switch>
+            <Route exact path="/">
+              <div className="flex flex-col min-h-screen pb-24">
+                <Header />
+                <CredsManager />
+                <Footer />
+              </div>
+            </Route>
+            <Route exact path="/login">
+              <div className="flex flex-col min-h-screen bg-teal-600">
+                <LoginScreen />
+              </div>
+            </Route>
+            <Redirect exact from="/" to="login" />
+          </Switch>
         </Suspense>
-        {/* </Router> */}
-        <Footer />
-      </div>
+      </Router>
     </CardContext.Provider>
   );
 }
