@@ -7,6 +7,7 @@ import './style.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import useDebounce from './Hooks/useDebounce';
 
 import { cardReducer, initializer } from './Redux/Card/cardReducer';
 
@@ -17,13 +18,17 @@ export const CardContext = React.createContext();
 export default function App() {
   const [cardState, cardDispatch] = useReducer(cardReducer, {}, initializer);
 
+  const debouncedCardState = useDebounce(cardState, 1000);
+
   useEffect(() => {
     let ciphertext = CryptoJS.AES.encrypt(
-      JSON.stringify(cardState),
+      JSON.stringify(debouncedCardState),
       'secretKey@123'
     ).toString();
     localStorage.setItem('data', JSON.stringify(ciphertext));
-  }, [cardState]);
+  }, [debouncedCardState]);
+
+  // console.log('APP');
 
   return (
     <CardContext.Provider

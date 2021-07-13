@@ -17,6 +17,8 @@ export default function Cards({ cardID }) {
       : ''
   );
 
+  console.log('cardData:', cardData);
+
   const debouncedTitle = useDebounce(cardName, 500);
 
   useEffect(() => {
@@ -107,15 +109,17 @@ export default function Cards({ cardID }) {
       <div className="flex flex-wrap mt-4">
         {cardData && cardData[cardID] && cardData[cardID].length > 0 ? (
           cardData[cardID].map(val => {
-            return (
-              <InputField
-                key={val.fieldID}
-                cardID={cardID}
-                fieldData={val}
-                cardName={cardName}
-                uniqueKey={val.fieldID}
-              />
-            );
+            if (val && val.fieldID) {
+              return (
+                <InputField
+                  key={val.fieldID}
+                  cardID={cardID}
+                  fieldData={val}
+                  cardName={cardName}
+                  uniqueKey={val.fieldID}
+                />
+              );
+            }
           })
         ) : (
           <div className="w-full text-center tracking-wide text-gray-500 font-bold mb-4 focus:outline-none">

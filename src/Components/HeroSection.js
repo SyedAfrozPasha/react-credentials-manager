@@ -1,11 +1,6 @@
 import React from 'react';
 
-export default function HeroSection({
-  title,
-  description1,
-  description2,
-  getNavigation
-}) {
+function HeroSection({ title, description1, description2, getNavigation }) {
   const navigateTool = e => {
     e.preventDefault();
     getNavigation(e.target);
@@ -41,3 +36,5 @@ export default function HeroSection({
     </section>
   );
 }
+
+export default React.memo(HeroSection);

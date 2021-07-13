@@ -5,7 +5,10 @@ import {
   UPDATE_CARD,
   ADD_INPUT_FIELD,
   REMOVE_INPUT_FIELD,
-  UPDATE_INPUT_FIELD
+  UPDATE_INPUT_FIELD,
+  UPDATE_FIELD_NAME,
+  UPDATE_FIELD_VALUE,
+  UPDATE_FIELD_VISIBLE
 } from './cardType';
 
 const generatedRandomString = (len = 36) => {
@@ -82,7 +85,89 @@ const removeInputField = (state, action) => {
   return state;
 };
 
-const updateInputField = (state, action) => {
+// const updateInputField = (state, action) => {
+//   if (action && action.payload) {
+//     const cardState = { ...state };
+//     const fieldData = cardState[action.payload.cardID];
+//     if (fieldData && fieldData.length > 0) {
+//       const cardObj = fieldData.map(field => {
+//         return {
+//           ...field,
+//           fieldName: action.payload.fieldName,
+//           fieldValue: action.payload.fieldValue,
+//           isMasked: action.payload.isMasked
+//           // cardName: action.payload.cardName
+//         };
+//       });
+
+//       return {
+//         ...cardState,
+//         [action.payload.cardID]: cardObj
+//       };
+//     }
+//     return cardState;
+//   }
+
+//   return state;
+// };
+
+const updateInputFieldName = (state, action) => {
+  if (action && action.payload) {
+    const cardState = { ...state };
+    const fieldData = cardState[action.payload.cardID];
+    if (fieldData && fieldData.length > 0) {
+      const cardObj = fieldData.map(field => {
+        return {
+          ...field,
+          fieldName: action.payload.fieldName,
+          fieldValue: action.payload.fieldValue,
+          isMasked: action.payload.isMasked
+          // cardName: action.payload.cardName
+        };
+      });
+
+      return {
+        ...cardState,
+        [action.payload.cardID]: cardObj
+      };
+    }
+    return cardState;
+  }
+
+  return state;
+};
+
+// TODO
+const updateInputFieldValue = (state, action) => {
+  if (action && action.payload) {
+    let updateFlag = false;
+    const cardState = { ...state };
+    const fieldData = cardState[action.payload.cardID];
+    if (fieldData && fieldData.length > 0) {
+      const cardObj = fieldData.map(field => {
+        if (field && field.fieldID === action.payload.fieldID) {
+          updateFlag = true;
+          return {
+            ...field,
+            fieldValue: action.payload.fieldValue
+          };
+        }
+      });
+
+      if (updateFlag) {
+        return {
+          ...cardState,
+          [action.payload.cardID]: cardObj
+        };
+      }
+    }
+    return cardState;
+  }
+
+  return state;
+};
+
+const updateInputFieldVisible = (state, action) => {
   if (action && action.payload) {
     const cardState = { ...state };
     const fieldData = cardState[action.payload.cardID];
@@ -147,7 +232,7 @@ export const cardReducer = (state, action) => {
       return updateCardLogic(state, action);
 
     case ADD_INPUT_FIELD:
-      return {
+      let returnObj = {
         ...state,
         [action.payload.cardID]: [
           ...state[action.payload.cardID],
@@ -162,12 +247,25 @@ export const cardReducer = (state, action) => {
           ]
         ]
       };
+      console.log('#########################');
+      console.log('returnObj:', returnObj);
+      console.log('#########################');
+      return returnObj;
 
     case REMOVE_INPUT_FIELD:
       return removeInputField(state, action);
 
-    case UPDATE_INPUT_FIELD:
-      return updateInputField(state, action);
+    // case UPDATE_INPUT_FIELD:
+    //   return updateInputField(state, action);
+
+    case UPDATE_FIELD_NAME:
+      return updateInputFieldName(state, action);
+
+    case UPDATE_FIELD_VALUE:
+      return updateInputFieldValue(state, action);
+
+    case UPDATE_FIELD_VISIBLE:
+      return updateInputFieldVisible(state, action);
 
     default:
       return state;

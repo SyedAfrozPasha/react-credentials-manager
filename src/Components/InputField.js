@@ -14,45 +14,45 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
   const debouncedFieldValue = useDebounce(fieldValue, 500);
 
   useEffect(() => {
-    cardContext.cardDispatch({
-      type: 'UPDATE_INPUT_FIELD',
-      payload: {
-        cardID,
-        fieldValue,
-        fieldName,
-        cardName,
-        isMasked: maskInput
-      }
-    });
+    if (fieldData && fieldData.fieldID) {
+      cardContext.cardDispatch({
+        type: 'UPDATE_FIELD_VALUE',
+        payload: {
+          cardID,
+          fieldID: fieldData.fieldID,
+          fieldValue: debouncedFieldValue
+        }
+      });
+    }
   }, [debouncedFieldValue]);
 
-  const debouncedFieldName = useDebounce(fieldName, 500);
+  // const debouncedFieldName = useDebounce(fieldName, 500);
 
-  useEffect(() => {
-    cardContext.cardDispatch({
-      type: 'UPDATE_INPUT_FIELD',
-      payload: {
-        cardID,
-        fieldValue,
-        fieldName,
-        cardName,
-        isMasked: maskInput
-      }
-    });
-  }, [debouncedFieldName]);
+  // useEffect(() => {
+  //   cardContext.cardDispatch({
+  //     type: 'UPDATE_INPUT_FIELD',
+  //     payload: {
+  //       cardID,
+  //       fieldValue,
+  //       fieldName,
+  //       cardName,
+  //       isMasked: maskInput
+  //     }
+  //   });
+  // }, [debouncedFieldName]);
 
-  useEffect(() => {
-    cardContext.cardDispatch({
-      type: 'UPDATE_INPUT_FIELD',
-      payload: {
-        cardID,
-        fieldValue,
-        fieldName,
-        cardName,
-        isMasked: maskInput
-      }
-    });
-  }, [maskInput]);
+  // useEffect(() => {
+  //   cardContext.cardDispatch({
+  //     type: 'UPDATE_INPUT_FIELD',
+  //     payload: {
+  //       cardID,
+  //       fieldValue,
+  //       fieldName,
+  //       cardName,
+  //       isMasked: maskInput
+  //     }
+  //   });
+  // }, [maskInput]);
 
   const togglePassword = (e, id) => {
     e.preventDefault();

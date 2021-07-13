@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header() {
+function Header() {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
       <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
@@ -20,3 +20,5 @@ export default function Header() {
     </nav>
   );
 }
+
+export default React.memo(Header);
