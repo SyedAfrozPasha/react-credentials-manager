@@ -52,31 +52,38 @@ export default function App() {
   }, [debouncedCardState]);
 
   return (
-    <CardContext.Provider
+    <AuthContext.Provider
       value={{
-        cardState,
-        cardDispatch
+        authState,
+        authDispatch
       }}
     >
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route exact path="/">
-              <div className="flex flex-col min-h-screen pb-24">
-                <Header />
-                <CredsManager />
-                <Footer />
-              </div>
-            </Route>
-            <Route exact path="/login">
-              <div className="flex flex-col min-h-screen bg-teal-600">
-                <LoginScreen />
-              </div>
-            </Route>
-            <Redirect exact from="/" to="login" />
-          </Switch>
-        </Suspense>
-      </Router>
-    </CardContext.Provider>
+      <CardContext.Provider
+        value={{
+          cardState,
+          cardDispatch
+        }}
+      >
+        <Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route exact path="/">
+                <div className="flex flex-col min-h-screen pb-24">
+                  <Header />
+                  <CredsManager />
+                  <Footer />
+                </div>
+              </Route>
+              <Route exact path="/login">
+                <div className="flex flex-col min-h-screen bg-teal-600">
+                  <LoginScreen />
+                </div>
+              </Route>
+              <Redirect exact from="/" to="login" />
+            </Switch>
+          </Suspense>
+        </Router>
+      </CardContext.Provider>
+    </AuthContext.Provider>
   );
 }
