@@ -3,6 +3,7 @@ import {
   ADD_CARD,
   REMOVE_CARD,
   UPDATE_CARD,
+  ADD_DATA,
   ADD_INPUT_FIELD,
   REMOVE_INPUT_FIELD,
   UPDATE_INPUT_FIELD
@@ -124,6 +125,11 @@ export const initializer = (initialValue = {}) => {
 
 export const cardReducer = (state, action) => {
   switch (action.type) {
+    case ADD_DATA:
+      return {
+        ...state,
+        ...action.payload.data
+      };
     case ADD_CARD:
       return {
         ...state,

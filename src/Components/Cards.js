@@ -62,7 +62,7 @@ export default function Cards({ cardID }) {
           <Tippy content="Add Input Field">
             <button
               // title="Add Input Field"
-              className="p-0 w-8 h-8 bg-gray-600 rounded-full hover:bg-gray-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              className="p-0 w-8 h-8 bg-gray-600 rounded-full hover:bg-teal-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
               onClick={addInputField}
             >
               <svg

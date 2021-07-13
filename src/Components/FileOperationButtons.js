@@ -1,24 +1,107 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import CryptoJS from 'crypto-js';
 import { CardContext } from '../App';
 
 export default function FileOpertaionButtons() {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
 
+  const [jsonFileData, setJsonFileData] = useState();
+
+  const inputFile = useRef(null);
+
+  const uploadJSONFile = () => {
+    inputFile.current.click();
+  };
+
+  const handleUpload = event => {
+    console.dir(event.target);
+    event.target.files[0];
+
+    if (
+      event.target &&
+      event.target.files &&
+      event.target.files.length > 0 &&
+      event.target.files[0] &&
+      event.target.files[0].name
+    ) {
+      let fileExt = event.target.files[0].name.split('.').pop();
+      fileExt = fileExt.toLowerCase();
+      if (fileExt === 'json') {
+        const fileReader = new FileReader();
+        fileReader.readAsText(event.target.files[0], 'UTF-8');
+        fileReader.onload = e => {
+          if (e.target.result) {
+            try {
+              let data = JSON.parse(e.target.result);
+              let ciphertext = CryptoJS.AES.encrypt(
+                JSON.stringify(data),
+                'secretKey@123'
+              ).toString();
+              localStorage.setItem('data', JSON.stringify(ciphertext));
+
+              cardContext.cardDispatch({
+                type: 'ADD_DATA',
+                payload: {
+                  data
+                }
+              });
+            } catch (err) {
+              alert('Unable to read data!');
+            }
+          }
+        };
+      } else {
+        alert('File format not supported!');
+      }
+    }
+  };
+
   const handleSaveToSystem = (e, filename = 'kreman-user-data') => {
+    console.dir(e.target);
     console.log('filename:', filename);
-    const fileData = JSON.stringify(cardData);
+    let isEncrypted = false;
+    let fileData = JSON.stringify(cardData);
+
+    if (
+      e.target &&
+      e.target.id &&
+      e.target.id === 'encryptedJSON' &&
+      localStorage.getItem('data')
+    ) {
+      try {
+        isEncrypted = true;
+        let jsonData = {
+          data: JSON.parse(localStorage.getItem('data'))
+        };
+        fileData = JSON.stringify(jsonData);
+      } catch (err) {}
+    }
+
     const blob = new Blob([fileData], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.download = `${filename}.json`;
+    link.download = isEncrypted
+      ? `${filename}-encrypted.json`
+      : `${filename}.json`;
     link.href = url;
     link.click();
   };
 
   return (
     <div className="flex flex-row-reverse mb-8">
-      <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center ml-2">
+      <input
+        type="file"
+        id="file"
+        ref={inputFile}
+        accept="application/json"
+        onChange={handleUpload}
+        style={{ display: 'none' }}
+      />
+      <button
+        className="bg-gray-300 text-gray-700 hover:bg-gray-400 font-semibold py-2 px-4 rounded inline-flex items-center ml-2"
+        onClick={uploadJSONFile}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -69,6 +152,8 @@ export default function FileOpertaionButtons() {
             <a
               className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
               role="button"
+              id="encryptedJSON"
+              onClick={handleSaveToSystem}
             >
               Encrypted Text
             </a>
@@ -77,6 +162,7 @@ export default function FileOpertaionButtons() {
             <a
               className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
               role="button"
+              id="plainJSON"
               onClick={handleSaveToSystem}
             >
               Plain Text
