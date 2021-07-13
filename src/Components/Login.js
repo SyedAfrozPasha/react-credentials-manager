@@ -1,12 +1,23 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { CardContext } from '../App';
 
 export default function Login() {
+  const [mpassword, setMPassword] = useState();
+
   const loginInputRef = useRef(null);
 
   useEffect(() => {
     // loginInputRef.current.focus();
   }, []);
+
+  const handleLogin = e => {
+    e.preventDefault();
+    console.log('mpassword:', mpassword);
+  };
+
+  const getPassword = e => {
+    setMPassword(e.target.value);
+  };
 
   return (
     <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5">
@@ -29,13 +40,13 @@ export default function Login() {
         </div>
       </div>
       <div
-        class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 shadow-md mt-6"
+        className="bg-teal-100 rounded-b text-teal-900 px-4 py-3 shadow-md mt-6"
         role="alert"
       >
-        <div class="flex">
-          <div class="py-1">
+        <div className="flex">
+          <div className="py-1">
             <svg
-              class="fill-current h-6 w-6 text-teal-500 mr-4"
+              className="fill-current h-6 w-6 text-teal-500 mr-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
@@ -43,8 +54,8 @@ export default function Login() {
             </svg>
           </div>
           <div>
-            <p class="font-bold">Important</p>
-            <p class="text-sm">
+            <p className="font-bold">Important</p>
+            <p className="text-sm">
               If you forgot your master password, you will not be able retrieve
               your data or password back.
             </p>
@@ -52,14 +63,19 @@ export default function Login() {
         </div>
       </div>
       <div className="mt-6">
-        <label className="block mb-2 font-bold text-teal-600" for="password">
+        <label
+          className="block mb-2 font-bold text-teal-600"
+          htmlFor="password"
+        >
           Master Password
         </label>
         <input
           className="w-full p-2 mb-6 text-teal-700 border-b-2 border-teal-500 outline-none"
           type="password"
           name="password"
+          id="password"
           ref={loginInputRef}
+          onChange={getPassword}
         />
       </div>
       <div>
@@ -67,6 +83,7 @@ export default function Login() {
           className="w-full bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 mb-6 rounded"
           type="button"
           value="Login"
+          onClick={handleLogin}
         />
       </div>
     </div>
