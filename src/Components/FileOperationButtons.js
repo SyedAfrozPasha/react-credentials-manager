@@ -42,6 +42,15 @@ export default function FileOpertaionButtons() {
       event.target.files[0] &&
       event.target.files[0].name
     ) {
+      // toast.success('Uploading File!', {
+      //   position: 'top-right',
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true
+      // });
+
       let fileExt = event.target.files[0].name.split('.').pop();
       fileExt = fileExt.toLowerCase();
       if (fileExt === 'json') {
