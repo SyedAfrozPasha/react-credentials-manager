@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
 
-export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
+export default function InputField({ cardID, uniqueKey, fieldData }) {
   const [maskInput, setMaskInput] = useState(fieldData.isMasked || false);
   const [enableCopy, setEnableCopy] = useState(true);
   const [fieldValue, setFieldValue] = useState(fieldData.fieldValue || '');
@@ -14,9 +14,9 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
   const debouncedFieldValue = useDebounce(fieldValue, 500);
 
   useEffect(() => {
-    if (fieldData && fieldData.fieldID) {
+    if (debouncedFieldValue && fieldData && fieldData.fieldID) {
       cardContext.cardDispatch({
-        type: 'UPDATE_FIELD_VALUE',
+        type: 'UPDATE_INPUT_FIELD',
         payload: {
           cardID,
           fieldID: fieldData.fieldID,
@@ -26,33 +26,33 @@ export default function InputField({ cardID, uniqueKey, fieldData, cardName }) {
     }
   }, [debouncedFieldValue]);
 
-  // const debouncedFieldName = useDebounce(fieldName, 500);
+  const debouncedFieldName = useDebounce(fieldName, 500);
 
-  // useEffect(() => {
-  //   cardContext.cardDispatch({
-  //     type: 'UPDATE_INPUT_FIELD',
-  //     payload: {
-  //       cardID,
-  //       fieldValue,
-  //       fieldName,
-  //       cardName,
-  //       isMasked: maskInput
-  //     }
-  //   });
-  // }, [debouncedFieldName]);
+  useEffect(() => {
+    if (debouncedFieldName && fieldData && fieldData.fieldID) {
+      cardContext.cardDispatch({
+        type: 'UPDATE_INPUT_FIELD',
+        payload: {
+          cardID,
+          fieldID: fieldData.fieldID,
+          fieldName: debouncedFieldName
+        }
+      });
+    }
+  }, [debouncedFieldName]);
 
-  // useEffect(() => {
-  //   cardContext.cardDispatch({
-  //     type: 'UPDATE_INPUT_FIELD',
-  //     payload: {
-  //       cardID,
-  //       fieldValue,
-  //       fieldName,
-  //       cardName,
-  //       isMasked: maskInput
-  //     }
-  //   });
-  // }, [maskInput]);
+  useEffect(() => {
+    if (fieldData && fieldData.fieldID) {
+      cardContext.cardDispatch({
+        type: 'UPDATE_INPUT_FIELD',
+        payload: {
+          cardID,
+          fieldID: fieldData.fieldID,
+          isMasked: maskInput
+        }
+      });
+    }
+  }, [maskInput]);
 
   const togglePassword = (e, id) => {
     e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
 import './style.css';
 
@@ -7,6 +7,7 @@ import './style.css';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+
 import useDebounce from './Hooks/useDebounce';
 
 import { cardReducer, initializer } from './Redux/Card/cardReducer';
@@ -28,8 +29,6 @@ export default function App() {
     localStorage.setItem('data', JSON.stringify(ciphertext));
   }, [debouncedCardState]);
 
-  // console.log('APP');
-
   return (
     <CardContext.Provider
       value={{
@@ -38,16 +37,16 @@ export default function App() {
       }}
     >
       <div className="flex flex-col min-h-screen">
-        <Router>
-          <Header />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path="/">
-                <CredsManager />
-              </Route>
-            </Switch>
-          </Suspense>
-        </Router>
+        {/* <Router> */}
+        <Header />
+        <Suspense fallback={<div>Loading...</div>}>
+          {/* <Switch>
+              <Route exact path="/"> */}
+          <CredsManager />
+          {/* </Route>
+            </Switch> */}
+        </Suspense>
+        {/* </Router> */}
         <Footer />
       </div>
     </CardContext.Provider>

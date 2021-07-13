@@ -17,7 +17,7 @@ export default function Cards({ cardID }) {
       : ''
   );
 
-  console.log('cardData:', cardData);
+  // console.log('cardData:', cardData);
 
   const debouncedTitle = useDebounce(cardName, 500);
 
@@ -115,7 +115,6 @@ export default function Cards({ cardID }) {
                   key={val.fieldID}
                   cardID={cardID}
                   fieldData={val}
-                  cardName={cardName}
                   uniqueKey={val.fieldID}
                 />
               );

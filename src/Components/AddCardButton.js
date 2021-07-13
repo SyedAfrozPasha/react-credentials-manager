@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Tippy from '@tippyjs/react';
 import { CardContext } from '../App';
-import useLocalStorage from '../Hooks/useLocalStorage';
 
 export default function AddCardButton() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
