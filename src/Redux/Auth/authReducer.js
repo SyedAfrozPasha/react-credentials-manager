@@ -1,13 +1,5 @@
 import CryptoJS from 'crypto-js';
-import {
-  ADD_CARD,
-  REMOVE_CARD,
-  UPDATE_CARD,
-  ADD_DATA,
-  ADD_INPUT_FIELD,
-  REMOVE_INPUT_FIELD,
-  UPDATE_INPUT_FIELD
-} from './cardType';
+import { LOGIN_USER, LOGOUT_USER } from './authType';
 
 const generatedRandomString = (len = 36) => {
   return Math.random()
@@ -107,7 +99,7 @@ const updateInputFields = (state, action) => {
   }
 };
 
-export const initializer = (initialValue = {}) => {
+export const authInitializer = (initialValue = {}) => {
   try {
     if (!localStorage.getItem('data')) {
       return initialValue;
@@ -125,55 +117,11 @@ export const initializer = (initialValue = {}) => {
 
 export const cardReducer = (state, action) => {
   switch (action.type) {
-    case ADD_DATA:
-      return {
-        ...state,
-        ...action.payload.data
-      };
-    case ADD_CARD:
-      return {
-        ...state,
-        [action.payload]: [
-          {
-            fieldID: generatedRandomString(),
-            fieldName: '',
-            cardName: '',
-            fieldValue: '',
-            isMasked: false
-          }
-        ]
-      };
-
-    case REMOVE_CARD:
+    case LOGIN_USER:
       return removeCardLogic(state, action);
 
-    case UPDATE_CARD:
+    case LOGOUT_USER:
       return updateCardLogic(state, action);
-
-    case ADD_INPUT_FIELD:
-      let returnObj = {
-        ...state,
-        [action.payload.cardID]: [
-          ...state[action.payload.cardID],
-          ...[
-            {
-              fieldID: generatedRandomString(),
-              fieldName: '',
-              cardName: action.payload.cardName || '',
-              fieldValue: '',
-              isMasked: false
-            }
-          ]
-        ]
-      };
-
-      return returnObj;
-
-    case REMOVE_INPUT_FIELD:
-      return removeInputField(state, action);
-
-    case UPDATE_INPUT_FIELD:
-      return updateInputFields(state, action);
 
     default:
       return state;

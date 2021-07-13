@@ -107,7 +107,7 @@ const updateInputFields = (state, action) => {
   }
 };
 
-export const initializer = (initialValue = {}) => {
+export const cardInitializer = (initialValue = {}) => {
   try {
     if (!localStorage.getItem('data')) {
       return initialValue;

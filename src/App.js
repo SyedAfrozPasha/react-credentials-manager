@@ -17,17 +17,29 @@ import Footer from './Components/Footer';
 
 import useDebounce from './Hooks/useDebounce';
 
-import { cardReducer, initializer } from './Redux/Card/cardReducer';
+import { cardReducer, cardInitializer } from './Redux/Card/cardReducer';
+import { authReducer, authInitializer } from './Redux/Auth/authReducer';
 
 const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 const LoginScreen = React.lazy(() => import('./Components/Login'));
 
 export const CardContext = React.createContext();
+export const AuthContext = React.createContext();
 
 toast.configure();
 
 export default function App() {
-  const [cardState, cardDispatch] = useReducer(cardReducer, {}, initializer);
+  const [cardState, cardDispatch] = useReducer(
+    cardReducer,
+    {},
+    cardInitializer
+  );
+
+  const [authState, authDispatch] = useReducer(
+    authReducer,
+    {},
+    authInitializer
+  );
 
   const debouncedCardState = useDebounce(cardState, 1000);
 
