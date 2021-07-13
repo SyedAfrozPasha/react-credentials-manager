@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Tippy from '@tippyjs/react';
+import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
 
@@ -77,6 +78,14 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
 
   const deleteInputField = e => {
     e.preventDefault();
+    toast.success('Input Field Removed!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
     cardContext.cardDispatch({
       type: 'REMOVE_INPUT_FIELD',
       payload: {

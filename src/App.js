@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect, Suspense } from 'react';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import CryptoJS from 'crypto-js';
+import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 
 // import 'tippy.js/dist/tippy.css';
@@ -15,6 +17,8 @@ import { cardReducer, initializer } from './Redux/Card/cardReducer';
 const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 
 export const CardContext = React.createContext();
+
+toast.configure();
 
 export default function App() {
   const [cardState, cardDispatch] = useReducer(cardReducer, {}, initializer);

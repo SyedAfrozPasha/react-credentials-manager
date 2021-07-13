@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Tippy from '@tippyjs/react';
+import { toast } from 'react-toastify';
 import InputField from './InputField';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
@@ -30,6 +31,14 @@ export default function Cards({ cardID }) {
   }, [debouncedTitle]);
 
   const removeCard = () => {
+    toast.success('Card Removed!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
     cardContext.cardDispatch({
       type: 'REMOVE_CARD',
       payload: cardID
@@ -41,6 +50,14 @@ export default function Cards({ cardID }) {
   };
 
   const addInputField = () => {
+    toast.success('Input Field Added!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
     cardContext.cardDispatch({
       type: 'ADD_INPUT_FIELD',
       payload: { cardID, cardName }

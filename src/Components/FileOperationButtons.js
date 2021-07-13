@@ -1,12 +1,32 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import CryptoJS from 'crypto-js';
+import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 
 export default function FileOpertaionButtons() {
   const cardContext = useContext(CardContext);
   const cardData = cardContext.cardState;
 
-  const [jsonFileData, setJsonFileData] = useState();
+  const isObjectEmpty = obj => {
+    return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
+  };
+
+  const initialSaveValue =
+    cardContext && cardContext.cardState && isObjectEmpty(cardContext.cardState)
+      ? true
+      : false;
+
+  const [isSaveDisabled, setIsSaveDisabled] = useState(initialSaveValue);
+
+  useEffect(() => {
+    const updatedSaveValue =
+      cardContext &&
+      cardContext.cardState &&
+      isObjectEmpty(cardContext.cardState)
+        ? true
+        : false;
+    setIsSaveDisabled(updatedSaveValue);
+  }, [cardContext.cardState]);
 
   const inputFile = useRef(null);
 
@@ -15,9 +35,6 @@ export default function FileOpertaionButtons() {
   };
 
   const handleUpload = event => {
-    console.dir(event.target);
-    event.target.files[0];
-
     if (
       event.target &&
       event.target.files &&
@@ -46,13 +63,38 @@ export default function FileOpertaionButtons() {
                   data
                 }
               });
+
+              toast.success('Data Uploaded!', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+              });
             } catch (err) {
-              alert('Unable to read data!');
+              // alert('Unable to read data!');
+              toast.error('Unable to read data!', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+              });
             }
           }
         };
       } else {
-        alert('File format not supported!');
+        // alert('File format not supported!');
+        toast.error('File format not supported!', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        });
       }
     }
   };
@@ -120,8 +162,16 @@ export default function FileOpertaionButtons() {
         </svg>
         <span>Import</span>
       </button>
-      <div className="dropdown hover:block inline-block relative ml-2">
-        <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+      <div
+        className={`hover:block inline-block relative ml-2 ${
+          isSaveDisabled ? 'cursor-not-allowed' : 'dropdown'
+        }`}
+      >
+        <button
+          className={`bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center ${
+            isSaveDisabled ? 'cursor-not-allowed' : ''
+          }`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -147,7 +197,11 @@ export default function FileOpertaionButtons() {
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{' '}
           </svg>
         </button>
-        <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-10">
+        <ul
+          className={`absolute hidden text-gray-700 pt-1 z-10 ${
+            isSaveDisabled ? 'cursor-not-allowed' : 'dropdown-menu'
+          }`}
+        >
           <li className="">
             <a
               className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"

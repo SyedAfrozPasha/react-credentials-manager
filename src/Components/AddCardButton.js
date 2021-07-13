@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Tippy from '@tippyjs/react';
+import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 
 export default function AddCardButton() {
@@ -19,6 +20,14 @@ export default function AddCardButton() {
   }, [cardContext.cardState]);
 
   const addCards = () => {
+    toast.success('Card Added!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
     cardContext.cardDispatch({
       type: 'ADD_CARD',
       payload: generatedRandomString()
