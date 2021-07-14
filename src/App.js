@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, Suspense } from 'react';
+import React, { useReducer, useEffect, useState, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,6 +34,8 @@ export const AuthContext = React.createContext();
 toast.configure();
 
 export default function App() {
+  const [secretToken, setSecretToken] = useState('');
+
   const [cardState, cardDispatch] = useReducer(
     cardReducer,
     {},
@@ -51,10 +53,17 @@ export default function App() {
   useEffect(() => {
     let ciphertext = CryptoJS.AES.encrypt(
       JSON.stringify(debouncedCardState),
-      'secretKey@123'
+      secretToken
     ).toString();
     localStorage.setItem('data', JSON.stringify(ciphertext));
   }, [debouncedCardState]);
+
+  useEffect(() => {
+    let encryptedToken = localStorage.getItem('token');
+    let bytes = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
+    let token = bytes.toString(CryptoJS.enc.Utf8);
+    setSecretToken(token);
+  }, [authState.token]);
 
   return (
     <AuthContext.Provider
@@ -79,13 +88,18 @@ export default function App() {
                 <LoginScreen />
               </Route>
               <Redirect exact from="/" to="login" /> */}
-              <PublicRoute
+              {/* <PublicRoute
                 restricted={false}
                 component={LoginScreen}
                 path="/login"
                 exact
-              />
-              <PrivateRoute component={LandingPage} path="/" exact />
+              /> */}
+              <PublicRoute path="/login" exact restricted={false}>
+                <LoginScreen />
+              </PublicRoute>
+              <PrivateRoute path="/" exact>
+                <LandingPage />
+              </PrivateRoute>
             </Switch>
           </Suspense>
         </Router>

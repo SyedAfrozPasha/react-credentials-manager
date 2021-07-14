@@ -113,8 +113,12 @@ export const cardInitializer = (initialValue = {}) => {
       return initialValue;
     }
 
+    let encryptedToken = localStorage.getItem('token');
+    let bytes1 = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
+    let token = bytes1.toString(CryptoJS.enc.Utf8);
+
     let ciphertext = JSON.parse(localStorage.getItem('data'));
-    let bytes = CryptoJS.AES.decrypt(ciphertext, 'secretKey@123');
+    let bytes = CryptoJS.AES.decrypt(ciphertext, token);
     let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decryptedData;
     // return JSON.parse(localStorage.getItem('data')) || initialValue;

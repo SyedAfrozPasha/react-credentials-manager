@@ -1,27 +1,19 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from '../App';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ children, ...rest }) => {
   const authContext = useContext(AuthContext);
   const authState = authContext.authState;
 
   console.log('Private:authState:', authState);
+  console.log('authState.isLoggedIn:', authState.isLoggedIn);
 
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        authState && authState.isLoggedIn ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: location }
-            }}
-          />
-        )
+      render={() =>
+        authState && authState.isLoggedIn ? children : <Redirect to="/login" />
       }
     />
   );
