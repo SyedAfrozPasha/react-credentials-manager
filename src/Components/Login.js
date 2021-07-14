@@ -29,10 +29,8 @@ export default function Login() {
         minSymbols: 1
       })
     ) {
-      console.log('SUCCESS');
-
-      let words = CryptoJS.enc.Utf8.parse(mpassword);
-      let token = CryptoJS.enc.Base64.stringify(words);
+      let words = mpassword ? CryptoJS.enc.Utf8.parse(mpassword) : null;
+      let token = words ? CryptoJS.enc.Base64.stringify(words) : null;
 
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('isLoggedIn', true);

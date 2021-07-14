@@ -1,4 +1,4 @@
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
 import { LOGIN_USER, LOGOUT_USER } from './authType';
 
 export const authInitializer = (
@@ -21,7 +21,7 @@ export const authInitializer = (
     };
     // return JSON.parse(localStorage.getItem('data')) || initialValue;
   } catch (err) {
-    console.log(err);
+    console.log('authInitializer:', err);
     return initialValue;
   }
 };
