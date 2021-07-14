@@ -36,16 +36,16 @@ toast.configure();
 export default function App() {
   const [secretToken, setSecretToken] = useState('');
 
+  const [authState, authDispatch] = useReducer(
+    authReducer,
+    { token: null, isLoggedIn: false },
+    authInitializer
+  );
+
   const [cardState, cardDispatch] = useReducer(
     cardReducer,
     {},
     cardInitializer
-  );
-
-  const [authState, authDispatch] = useReducer(
-    authReducer,
-    {},
-    authInitializer
   );
 
   const debouncedCardState = useDebounce(cardState, 1000);
@@ -66,6 +66,9 @@ export default function App() {
       setSecretToken(token);
     }
   }, [authState.token]);
+
+  console.log('authState:', authState);
+  console.log('cardState:', cardState);
 
   return (
     <AuthContext.Provider

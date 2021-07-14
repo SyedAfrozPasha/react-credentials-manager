@@ -38,6 +38,8 @@ export default function Login() {
       localStorage.setItem('token', JSON.stringify(ciphertext));
       localStorage.setItem('isLoggedIn', true);
 
+      console.log('ciphertext:', ciphertext);
+
       authContext.authDispatch({
         type: 'LOGIN_USER',
         payload: {
