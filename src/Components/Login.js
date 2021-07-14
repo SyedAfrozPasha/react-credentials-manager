@@ -7,7 +7,6 @@ import { AuthContext, CardContext } from '../App';
 export default function Login() {
   const cardContext = useContext(CardContext);
   const authContext = useContext(AuthContext);
-  const authState = authContext.authState;
 
   const [mpassword, setMPassword] = useState();
 
@@ -50,16 +49,14 @@ export default function Login() {
 
       if (localStorage.getItem('data') && token) {
         let ciphertext = JSON.parse(localStorage.getItem('data'));
-        let encryptedToken = JSON.parse(localStorage.getItem('token'));
 
-        let words = encryptedToken
-          ? CryptoJS.enc.Base64.parse(encryptedToken)
-          : null;
-        let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
+        let words = CryptoJS.enc.Base64.parse(token);
+        let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
 
+        console.log('sToken-----:', sToken);
         console.log('ciphertext-----:', ciphertext);
 
-        let bytes = token ? CryptoJS.AES.decrypt(ciphertext, token) : null;
+        let bytes = sToken ? CryptoJS.AES.decrypt(ciphertext, sToken) : null;
         let decryptedData = bytes
           ? JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
           : {};
