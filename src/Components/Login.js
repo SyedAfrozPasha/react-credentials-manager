@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import CryptoJS from 'crypto-js';
 import validator from 'validator';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../App';
+import { AuthContext, CardContext } from '../App';
 
 export default function Login() {
+  const cardContext = useContext(CardContext);
   const authContext = useContext(AuthContext);
+  const authState = authContext.authState;
 
   const [mpassword, setMPassword] = useState();
 
@@ -43,6 +45,41 @@ export default function Login() {
           token
         }
       });
+
+      console.log('#DATA@:', localStorage.getItem('data'));
+
+      if (localStorage.getItem('data') && token) {
+        let ciphertext = JSON.parse(localStorage.getItem('data'));
+        let encryptedToken = JSON.parse(localStorage.getItem('token'));
+
+        let words = encryptedToken
+          ? CryptoJS.enc.Base64.parse(encryptedToken)
+          : null;
+        let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
+
+        console.log('ciphertext-----:', ciphertext);
+
+        let bytes = token ? CryptoJS.AES.decrypt(ciphertext, token) : null;
+        let decryptedData = bytes
+          ? JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+          : {};
+
+        console.log('decryptedData:', decryptedData);
+
+        // let data = JSON.parse(localStorage.getItem('data'));
+        // let ciphertext = CryptoJS.AES.encrypt(
+        //   JSON.stringify(data),
+        //   token
+        // ).toString();
+        // localStorage.setItem('data', JSON.stringify(ciphertext));
+
+        cardContext.cardDispatch({
+          type: 'ADD_DATA',
+          payload: {
+            data: decryptedData
+          }
+        });
+      }
 
       // setErrorMessage('Is Strong Password');
     } else {
