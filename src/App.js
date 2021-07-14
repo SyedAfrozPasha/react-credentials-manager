@@ -59,10 +59,12 @@ export default function App() {
   }, [debouncedCardState]);
 
   useEffect(() => {
-    let encryptedToken = localStorage.getItem('token');
-    let bytes = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
-    let token = bytes.toString(CryptoJS.enc.Utf8);
-    setSecretToken(token);
+    if (localStorage.getItem('token')) {
+      let encryptedToken = localStorage.getItem('token');
+      let bytes = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
+      let token = bytes.toString(CryptoJS.enc.Utf8);
+      setSecretToken(token);
+    }
   }, [authState.token]);
 
   return (

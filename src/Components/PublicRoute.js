@@ -6,8 +6,6 @@ const PublicRoute = ({ children, restricted, ...rest }) => {
   const authContext = useContext(AuthContext);
   const authState = authContext.authState;
 
-  console.log('public:authState:', authState);
-
   return (
     <Route
       {...rest}

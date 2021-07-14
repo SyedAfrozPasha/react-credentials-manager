@@ -5,10 +5,6 @@ import { AuthContext } from '../App';
 const PrivateRoute = ({ children, ...rest }) => {
   const authContext = useContext(AuthContext);
   const authState = authContext.authState;
-
-  console.log('Private:authState:', authState);
-  console.log('authState.isLoggedIn:', authState.isLoggedIn);
-
   return (
     <Route
       {...rest}

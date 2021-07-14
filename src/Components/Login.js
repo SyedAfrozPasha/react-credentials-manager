@@ -108,30 +108,32 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <div className="mt-6">
-          <label
-            className="block mb-2 font-bold text-teal-600"
-            htmlFor="password"
-          >
-            Master Password
-          </label>
-          <input
-            className="w-full p-2 mb-6 text-teal-700 border-b-2 border-teal-500 outline-none"
-            type="password"
-            name="password"
-            id="password"
-            ref={loginInputRef}
-            onChange={getPassword}
-          />
-        </div>
-        <div>
-          <input
-            className="w-full bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 mb-6 rounded"
-            type="button"
-            value="Login"
-            onClick={handleLogin}
-          />
-        </div>
+        <form>
+          <div className="mt-6">
+            <label
+              className="block mb-2 font-bold text-teal-600"
+              htmlFor="password"
+            >
+              Master Password
+            </label>
+            <input
+              className="w-full p-2 mb-6 text-teal-700 border-b-2 border-teal-500 outline-none"
+              type="password"
+              name="password"
+              id="password"
+              ref={loginInputRef}
+              onChange={getPassword}
+            />
+          </div>
+          <div>
+            <input
+              className="w-full bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 mb-6 rounded"
+              type="submit"
+              value="Login"
+              onClick={handleLogin}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
