@@ -10,7 +10,11 @@ const PublicRoute = ({ children, restricted, ...rest }) => {
     <Route
       {...rest}
       render={() =>
-        authState && !authState.isLoggedIn ? children : <Redirect to="/" />
+        authState && (!authState.isLoggedIn || !authState.token) ? (
+          children
+        ) : (
+          <Redirect to="/" />
+        )
       }
     />
   );
