@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Tippy from '@tippyjs/react';
 import { AuthContext } from '../App';
 

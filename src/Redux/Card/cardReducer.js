@@ -109,7 +109,7 @@ const updateInputFields = (state, action) => {
 
 export const cardInitializer = (initialValue = {}) => {
   try {
-    if (!localStorage.getItem('token') || !localStorage.getItem('data')) {
+    if (!localStorage.getItem('token') && !localStorage.getItem('data')) {
       return initialValue;
     }
 
