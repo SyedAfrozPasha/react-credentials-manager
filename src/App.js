@@ -12,15 +12,20 @@ import './style.css';
 
 // import 'tippy.js/dist/tippy.css';
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+// import Header from './Components/Header';
+// import Footer from './Components/Footer';
+
+import PrivateRoute from './Components/PrivateRoute';
+import PublicRoute from './Components/PublicRoute';
+
+import LandingPage from './Components/LandingPage';
 
 import useDebounce from './Hooks/useDebounce';
 
 import { cardReducer, cardInitializer } from './Redux/Card/cardReducer';
 import { authReducer, authInitializer } from './Redux/Auth/authReducer';
 
-const CredsManager = React.lazy(() => import('./Components/CredsManager'));
+// const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 const LoginScreen = React.lazy(() => import('./Components/Login'));
 
 export const CardContext = React.createContext();
@@ -67,19 +72,20 @@ export default function App() {
         <Router>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <Route exact path="/">
-                <div className="flex flex-col min-h-screen pb-24">
-                  <Header />
-                  <CredsManager />
-                  <Footer />
-                </div>
+              {/* <Route exact path="/">
+                <LandingPage />
               </Route>
               <Route exact path="/login">
-                <div className="flex flex-col min-h-screen bg-teal-600">
-                  <LoginScreen />
-                </div>
+                <LoginScreen />
               </Route>
-              <Redirect exact from="/" to="login" />
+              <Redirect exact from="/" to="login" /> */}
+              <PublicRoute
+                restricted={false}
+                component={LoginScreen}
+                path="/login"
+                exact
+              />
+              <PrivateRoute component={LandingPage} path="/" exact />
             </Switch>
           </Suspense>
         </Router>
