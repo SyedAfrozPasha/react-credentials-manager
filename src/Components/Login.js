@@ -31,19 +31,18 @@ export default function Login() {
     ) {
       console.log('SUCCESS');
 
-      let ciphertext = CryptoJS.AES.encrypt(
-        mpassword,
-        '$ecRet_Key@1234'
-      ).toString();
-      localStorage.setItem('token', JSON.stringify(ciphertext));
+      let words = CryptoJS.enc.Utf8.parse(mpassword);
+      let token = CryptoJS.enc.Base64.stringify(words);
+
+      localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('isLoggedIn', true);
 
-      console.log('ciphertext:', ciphertext);
+      console.log('SECRET:', token);
 
       authContext.authDispatch({
         type: 'LOGIN_USER',
         payload: {
-          token: ciphertext
+          token
         }
       });
 

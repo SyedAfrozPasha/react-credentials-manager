@@ -4,6 +4,7 @@ import {
   REMOVE_CARD,
   UPDATE_CARD,
   ADD_DATA,
+  CLEAR_DATA,
   ADD_INPUT_FIELD,
   REMOVE_INPUT_FIELD,
   UPDATE_INPUT_FIELD
@@ -113,9 +114,23 @@ export const cardInitializer = (initialValue = {}) => {
       return initialValue;
     }
 
+    console.log('#cardInitializer#');
+
+    // let textString = 'Hello world';
+    // var words1 = CryptoJS.enc.Utf8.parse(textString);
+    // console.log('words1:', words1);
+    // var base641 = CryptoJS.enc.Base64.stringify(words1);
+    // console.log('base641:', base641);
+
     let encryptedToken = localStorage.getItem('token');
-    let bytes1 = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
-    let token = bytes1.toString(CryptoJS.enc.Utf8);
+    let words = CryptoJS.enc.Base64.parse(encryptedToken);
+    let token = CryptoJS.enc.Utf8.stringify(words);
+
+    // let words = CryptoJS.enc.Utf8.parse(encryptedToken);
+    // let token = CryptoJS.enc.Base64.stringify(words);
+
+    // let bytes1 = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
+    // let token = bytes1.toString(CryptoJS.enc.Utf8);
 
     let ciphertext = JSON.parse(localStorage.getItem('data'));
     let bytes = CryptoJS.AES.decrypt(ciphertext, token);
@@ -123,6 +138,7 @@ export const cardInitializer = (initialValue = {}) => {
     return decryptedData;
     // return JSON.parse(localStorage.getItem('data')) || initialValue;
   } catch (err) {
+    console.log('cardInitializer:', err);
     return initialValue;
   }
 };
@@ -134,6 +150,10 @@ export const cardReducer = (state, action) => {
         ...state,
         ...action.payload.data
       };
+
+    case CLEAR_DATA:
+      return {};
+
     case ADD_CARD:
       return {
         ...state,

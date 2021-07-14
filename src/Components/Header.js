@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import Tippy from '@tippyjs/react';
-import { AuthContext } from '../App';
+import { AuthContext, CardContext } from '../App';
 
 function Header() {
   const authContext = useContext(AuthContext);
+  const cardContext = useContext(CardContext);
 
   const handleLogout = () => {
     authContext.authDispatch({
       type: 'LOGOUT_USER'
+    });
+
+    cardContext.cardDispatch({
+      type: 'CLEAR_DATA'
     });
     localStorage.setItem('token', null);
     localStorage.setItem('isLoggedIn', false);
