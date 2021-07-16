@@ -114,8 +114,6 @@ export const cardInitializer = (initialValue = {}) => {
       return initialValue;
     }
 
-    console.log('#cardInitializer#');
-
     let ciphertext = JSON.parse(localStorage.getItem('data'));
     let encryptedToken = JSON.parse(localStorage.getItem('token'));
 

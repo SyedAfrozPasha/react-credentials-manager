@@ -14,6 +14,7 @@ function Header() {
     cardContext.cardDispatch({
       type: 'CLEAR_DATA'
     });
+
     localStorage.setItem('token', null);
     localStorage.setItem('isLoggedIn', false);
   };

@@ -51,11 +51,13 @@ export default function App() {
   const debouncedCardState = useDebounce(cardState, 1000);
 
   useEffect(() => {
-    let ciphertext = CryptoJS.AES.encrypt(
-      JSON.stringify(debouncedCardState),
-      secretToken
-    ).toString();
-    localStorage.setItem('data', JSON.stringify(ciphertext));
+    if (authState.token) {
+      let ciphertext = CryptoJS.AES.encrypt(
+        JSON.stringify(debouncedCardState),
+        secretToken
+      ).toString();
+      localStorage.setItem('data', JSON.stringify(ciphertext));
+    }
   }, [debouncedCardState]);
 
   useEffect(() => {
@@ -63,16 +65,11 @@ export default function App() {
       localStorage.getItem('token') &&
       JSON.parse(localStorage.getItem('token'))
     ) {
-      console.log('useEffect - APP');
-
       let encryptedToken = JSON.parse(localStorage.getItem('token'));
-      console.log('encryptedToken:', encryptedToken);
       let words = encryptedToken
         ? CryptoJS.enc.Base64.parse(encryptedToken)
         : null;
       let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
-
-      console.log('token:LL', token);
 
       // let encryptedToken = localStorage.getItem('token');
       // let bytes = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
@@ -80,9 +77,6 @@ export default function App() {
       setSecretToken(token);
     }
   }, [authState.token]);
-
-  console.log('authState:', authState);
-  console.log('cardState:', cardState);
 
   return (
     <AuthContext.Provider

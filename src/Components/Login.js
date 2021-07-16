@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { AuthContext, CardContext } from '../App';
 
 export default function Login() {
-  const cardContext = useContext(CardContext);
   const authContext = useContext(AuthContext);
+  const cardContext = useContext(CardContext);
 
   const [mpassword, setMPassword] = useState();
 
@@ -30,57 +30,43 @@ export default function Login() {
         minSymbols: 1
       })
     ) {
-      let words = mpassword ? CryptoJS.enc.Utf8.parse(mpassword) : null;
-      let token = words ? CryptoJS.enc.Base64.stringify(words) : null;
+      try {
+        let words = mpassword ? CryptoJS.enc.Utf8.parse(mpassword) : null;
+        let token = words ? CryptoJS.enc.Base64.stringify(words) : null;
 
-      localStorage.setItem('token', JSON.stringify(token));
-      localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('isLoggedIn', true);
 
-      console.log('SECRET:', token);
-
-      authContext.authDispatch({
-        type: 'LOGIN_USER',
-        payload: {
-          token
-        }
-      });
-
-      console.log('#DATA@:', localStorage.getItem('data'));
-
-      if (localStorage.getItem('data') && token) {
-        let ciphertext = JSON.parse(localStorage.getItem('data'));
-
-        let words = CryptoJS.enc.Base64.parse(token);
-        let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
-
-        console.log('sToken-----:', sToken);
-        console.log('ciphertext-----:', ciphertext);
-
-        let bytes = sToken ? CryptoJS.AES.decrypt(ciphertext, sToken) : null;
-        let decryptedData = bytes
-          ? JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
-          : {};
-
-        console.log('decryptedData:', decryptedData);
-
-        // let data = JSON.parse(localStorage.getItem('data'));
-        // let ciphertext = CryptoJS.AES.encrypt(
-        //   JSON.stringify(data),
-        //   token
-        // ).toString();
-        // localStorage.setItem('data', JSON.stringify(ciphertext));
-
-        cardContext.cardDispatch({
-          type: 'ADD_DATA',
+        authContext.authDispatch({
+          type: 'LOGIN_USER',
           payload: {
-            data: decryptedData
+            token
           }
         });
-      }
 
-      // setErrorMessage('Is Strong Password');
+        if (localStorage.getItem('data') && token) {
+          let ciphertext = JSON.parse(localStorage.getItem('data'));
+
+          let words = CryptoJS.enc.Base64.parse(token);
+          let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
+
+          let bytes = sToken ? CryptoJS.AES.decrypt(ciphertext, sToken) : null;
+
+          let decryptedData = bytes
+            ? JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+            : {};
+
+          cardContext.cardDispatch({
+            type: 'ADD_DATA',
+            payload: {
+              data: decryptedData
+            }
+          });
+        }
+      } catch (err) {
+        console.log('LOGIN ERRL:', err);
+      }
     } else {
-      // setErrorMessage('Is Not Strong Password');
       toast.error('Password is Weak!', {
         position: 'top-right',
         autoClose: 2000,
