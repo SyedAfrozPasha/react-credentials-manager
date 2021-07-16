@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Tooltip from 'react-tippy';
+import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
@@ -139,22 +139,22 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
       </div>
 
       <div className="relative w-full">
-        <Tooltip title={enableCopy ? 'Copy' : 'Copied'}>
-          <div
-            className="absolute inset-y-0 right-0 flex items-center px-2"
-            onClick={e => toggleCopy(e, uniqueKey)}
+        <div
+          className="absolute inset-y-0 right-0 flex items-center px-2"
+          onClick={e => toggleCopy(e, uniqueKey)}
+        >
+          <input
+            className="hidden"
+            id={`copy-toggle-${uniqueKey}`}
+            name={`copy-input-${uniqueKey}`}
+            type="checkbox"
+          />
+          <label
+            className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
+            htmlFor={`copy-toggle-${uniqueKey}`}
+            // title={enableCopy ? 'Copy' : 'Copied'}
           >
-            <input
-              className="hidden"
-              id={`copy-toggle-${uniqueKey}`}
-              name={`copy-input-${uniqueKey}`}
-              type="checkbox"
-            />
-            <label
-              className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
-              htmlFor={`copy-toggle-${uniqueKey}`}
-              // title={enableCopy ? 'Copy' : 'Copied'}
-            >
+            <Tooltip title={enableCopy ? 'Copy' : 'Copied'}>
               {enableCopy && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -187,26 +187,26 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               )}
-            </label>
-          </div>
-        </Tooltip>
-        <Tooltip title={maskInput ? 'Show' : 'Hide'}>
-          <div
-            className="absolute inset-y-0 right-0 flex items-center px-2 mr-10"
-            onClick={e => togglePassword(e, uniqueKey)}
+            </Tooltip>
+          </label>
+        </div>
+        <div
+          className="absolute inset-y-0 right-0 flex items-center px-2 mr-10"
+          onClick={e => togglePassword(e, uniqueKey)}
+        >
+          <input
+            className="hidden password-toggle"
+            id="password-toggle"
+            type="checkbox"
+            value={maskInput}
+          />
+          <label
+            className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
+            htmlFor="password-toggle"
+            name="password-input"
+            // title={maskInput ? 'Show' : 'Hide'}
           >
-            <input
-              className="hidden password-toggle"
-              id="password-toggle"
-              type="checkbox"
-              value={maskInput}
-            />
-            <label
-              className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
-              htmlFor="password-toggle"
-              name="password-input"
-              // title={maskInput ? 'Show' : 'Hide'}
-            >
+            <Tooltip title={maskInput ? 'Show' : 'Hide'}>
               {maskInput && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -240,9 +240,10 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               )}
-            </label>
-          </div>
-        </Tooltip>
+            </Tooltip>
+          </label>
+        </div>
+
         <input
           className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id={`input-${uniqueKey}`}
