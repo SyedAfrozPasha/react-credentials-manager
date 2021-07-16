@@ -109,8 +109,6 @@ export default function FileOpertaionButtons() {
   };
 
   const handleSaveToSystem = (e, filename = 'kreman-user-data') => {
-    console.dir(e.target);
-    console.log('filename:', filename);
     let isEncrypted = false;
     let fileData = JSON.stringify(cardData);
 

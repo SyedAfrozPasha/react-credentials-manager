@@ -18,7 +18,6 @@ export default function Cards({ cardID }) {
       : ''
   );
 
-  // console.log('cardData:', cardData);
 
   const debouncedTitle = useDebounce(cardName, 500);
 

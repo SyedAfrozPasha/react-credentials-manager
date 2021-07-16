@@ -18,7 +18,6 @@ export default function Login() {
 
   const handleLogin = e => {
     e.preventDefault();
-    console.log('mpassword:', mpassword);
 
     if (
       mpassword &&
@@ -64,7 +63,7 @@ export default function Login() {
           });
         }
       } catch (err) {
-        console.log('LOGIN ERRL:', err);
+        console.log('LOGIN ERR:', err);
       }
     } else {
       toast.error('Password is Weak!', {
