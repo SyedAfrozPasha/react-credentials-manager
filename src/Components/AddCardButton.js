@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Tippy from '@tippyjs/react';
+import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 
@@ -48,7 +48,7 @@ export default function AddCardButton() {
     <div className="h-full">
       <div className="fixed bottom-0 right-0 w-16 h-16 mr-4 mb-12" id="box_btn">
         <span className="relative inline-flex rounded-md shadow-sm">
-          <Tippy content="Add Card">
+          <Tooltip title="Add Card">
             <button
               className="p-0 w-12 h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
               // title="Add Card"
@@ -67,7 +67,7 @@ export default function AddCardButton() {
                 />
               </svg>
             </button>
-          </Tippy>
+          </Tooltip>
 
           {isFirstLoad && (
             <span className="flex absolute h-3 w-3 top-0 right-0 mt-0 mr-0">

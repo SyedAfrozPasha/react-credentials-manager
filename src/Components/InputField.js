@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Tippy from '@tippyjs/react';
+import Tooltip from 'react-tippy';
 import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 import useDebounce from '../Hooks/useDebounce';
@@ -112,7 +112,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
           value={fieldName}
           onChange={updateFieldName}
         />
-        <Tippy content="Delete Input Field">
+        <Tooltip title="Delete Input Field">
           <span
             // title="Delete this Field"
             className="text-gray-600 cursor-pointer hover:text-red-700"
@@ -135,11 +135,11 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
               <line x1="9" y1="9" x2="15" y2="15" />
             </svg>
           </span>
-        </Tippy>
+        </Tooltip>
       </div>
 
       <div className="relative w-full">
-        <Tippy content={enableCopy ? 'Copy' : 'Copied'}>
+        <Tooltip title={enableCopy ? 'Copy' : 'Copied'}>
           <div
             className="absolute inset-y-0 right-0 flex items-center px-2"
             onClick={e => toggleCopy(e, uniqueKey)}
@@ -189,8 +189,8 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
               )}
             </label>
           </div>
-        </Tippy>
-        <Tippy content={maskInput ? 'Show' : 'Hide'}>
+        </Tooltip>
+        <Tooltip title={maskInput ? 'Show' : 'Hide'}>
           <div
             className="absolute inset-y-0 right-0 flex items-center px-2 mr-10"
             onClick={e => togglePassword(e, uniqueKey)}
@@ -242,7 +242,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
               )}
             </label>
           </div>
-        </Tippy>
+        </Tooltip>
         <input
           className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id={`input-${uniqueKey}`}

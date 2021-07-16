@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Tippy from '@tippyjs/react';
+import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import InputField from './InputField';
 import { CardContext } from '../App';
@@ -74,7 +74,7 @@ export default function Cards({ cardID }) {
           onChange={updateCardName}
         />
         <span className="relative inline-flex rounded-md shadow-sm">
-          <Tippy content="Add Input Field">
+          <Tooltip title="Add Input Field">
             <button
               // title="Add Input Field"
               className="p-0 w-8 h-8 bg-gray-600 rounded-full hover:bg-teal-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
@@ -93,8 +93,8 @@ export default function Cards({ cardID }) {
                 />
               </svg>
             </button>
-          </Tippy>
-          <Tippy content="Delete Card">
+          </Tooltip>
+          <Tooltip title="Delete Card">
             <button
               // title="Delete this card"
               className="p-0 ml-1 w-8 h-8 bg-gray-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white"
@@ -118,7 +118,7 @@ export default function Cards({ cardID }) {
                 <line x1="14" y1="11" x2="14" y2="17" />
               </svg>
             </button>
-          </Tippy>
+          </Tooltip>
         </span>
       </div>
       <div className="flex flex-wrap mt-4">

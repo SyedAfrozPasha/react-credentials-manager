@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Tippy from '@tippyjs/react';
+import { Tooltip } from 'react-tippy';
 import { AuthContext, CardContext } from '../App';
 
 function Header() {
@@ -36,7 +36,7 @@ function Header() {
         </svg>
       </div>
       <div>
-        <Tippy content="Logout">
+        <Tooltip title="Logout">
           <button className="outline-none" onClick={handleLogout}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ function Header() {
               <line x1="21" y1="12" x2="9" y2="12" />
             </svg>
           </button>
-        </Tippy>
+        </Tooltip>
       </div>
     </nav>
   );
