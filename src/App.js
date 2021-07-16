@@ -10,7 +10,7 @@ import CryptoJS from 'crypto-js';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 
-// import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/tippy.css';
 
 // import Header from './Components/Header';
 // import Footer from './Components/Footer';
