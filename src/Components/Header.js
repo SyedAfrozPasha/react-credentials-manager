@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Tooltip } from 'react-tippy';
+import Modal from 'react-modal';
 import { AuthContext, CardContext } from '../App';
 
 function Header() {
   const authContext = useContext(AuthContext);
   const cardContext = useContext(CardContext);
+
+  const [modalIsOpen, setIsOpen] = React.useState(true);
 
   const handleLogout = () => {
     authContext.authDispatch({
@@ -17,6 +20,18 @@ function Header() {
 
     localStorage.setItem('token', null);
     localStorage.setItem('isLoggedIn', false);
+  };
+
+  const customStyles = {
+    content: {
+      top: 'auto',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      height: '200px'
+      // marginRight: '-50%',
+      // transform: 'translate(-50%, -50%)'
+    }
   };
 
   return (
@@ -56,6 +71,9 @@ function Header() {
           </button>
         </Tooltip>
       </div>
+      {/* <Modal isOpen={modalIsOpen} style={customStyles}>
+        <div>I am a modal</div>
+      </Modal> */}
     </nav>
   );
 }

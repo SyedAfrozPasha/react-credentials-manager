@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CryptoJS from 'crypto-js';
+import Modal from 'react-modal';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 
@@ -32,6 +33,7 @@ export const CardContext = React.createContext();
 export const AuthContext = React.createContext();
 
 toast.configure();
+Modal.setAppElement('#root');
 
 export default function App() {
   const [secretToken, setSecretToken] = useState('');
