@@ -52,7 +52,10 @@ function Header() {
       </div>
       <div>
         <Tooltip title="Logout">
-          <button className="outline-none" onClick={handleLogout}>
+          <button
+            className="outline-none focus:outline-none"
+            onClick={handleLogout}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
