@@ -6,6 +6,8 @@ function HeroSection({ title, description1, description2, getNavigation }) {
     getNavigation(e.target);
   };
 
+  console.log('HEROSECTION');
+
   return (
     <section className="bg-teal-100 p-8 text-center">
       <h1 className="text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">

@@ -1,14 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import HeroSection from './HeroSection';
-import Card from './Cards';
 import AddCardButton from './AddCardButton';
 import FileOperationButtons from './FileOperationButtons';
-import { CardContext } from '../App';
+import CardGrid from './CardGrid';
 
 export default function CredsManager() {
-  const cardContext = useContext(CardContext);
-  const cardState = cardContext.cardState;
-
   // const navigateToTool = propEvent => {
   //   let navigate =
   //     propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
@@ -57,15 +53,7 @@ export default function CredsManager() {
 
       <div id="tool-start" className="p-8">
         <FileOperationButtons />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cardState &&
-            Object.keys(cardState).length > 0 &&
-            Object.keys(cardState).map((item, i) => {
-              if (item) {
-                return <Card key={item} cardID={item} />;
-              }
-            })}
-        </div>
+        <CardGrid />
       </div>
 
       <AddCardButton />
