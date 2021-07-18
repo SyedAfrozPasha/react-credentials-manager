@@ -3,11 +3,12 @@ import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import { CardContext } from '../App';
 
-export default function AddCardButton() {
+function AddCardButton() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const cardContext = useContext(CardContext);
 
   useEffect(() => {
+    console.log('USE_EFFECT');
     if (
       cardContext &&
       cardContext.cardState &&
@@ -43,6 +44,8 @@ export default function AddCardButton() {
   const isObjectEmpty = obj => {
     return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
   };
+
+  console.log('ADD BUTTON');
 
   return (
     <div className="h-full">
@@ -80,3 +83,5 @@ export default function AddCardButton() {
     </div>
   );
 }
+
+export default React.memo(AddCardButton);

@@ -19,7 +19,7 @@ export default function Login() {
   const handleLogin = e => {
     e.preventDefault();
 
-    console.log('LOGIN');
+    console.log('LOGIN BUTTON');
 
     if (
       mpassword &&
@@ -83,6 +83,8 @@ export default function Login() {
   const getPassword = e => {
     setMPassword(e.target.value);
   };
+
+  console.log('LOGIN');
 
   return (
     <div className="flex flex-col min-h-screen bg-teal-600">
