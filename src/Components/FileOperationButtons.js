@@ -12,10 +12,9 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, getData }) {
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(isFirstLoad);
 
-  // useEffect(() => {
-  //   const updatedSaveValue = cardData && isObjectEmpty(cardData) ? true : false;
-  //   setIsSaveDisabled(updatedSaveValue);
-  // }, [cardData]);
+  useEffect(() => {
+    setIsSaveDisabled(isFirstLoad);
+  }, [isFirstLoad]);
 
   const inputFile = useRef(null);
 
@@ -101,6 +100,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, getData }) {
     let isEncrypted = false;
 
     let data = getData();
+    console.log('DATA:', data);
     let fileData = JSON.stringify(data);
     // let fileData = JSON.stringify(cardData);
 

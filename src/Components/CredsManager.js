@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import HeroSection from './HeroSection';
 import AddCardButton from './AddCardButton';
 import FileOperationButtons from './FileOperationButtons';
@@ -60,9 +60,11 @@ export default function CredsManager() {
   //   }
   // };
 
-  const getData = () => {
-    return cardContext.cardState;
-  };
+  // const getData = () => {
+  //   return cardContext.cardState;
+  // };
+
+  const getData = useCallback(() => cardContext.cardState, []);
 
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
