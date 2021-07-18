@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import HeroSection from './HeroSection';
 import AddCardButton from './AddCardButton';
 import FileOperationButtons from './FileOperationButtons';
 import CardGrid from './CardGrid';
+import { CardContext } from '../App';
+import { isObjectEmpty } from '../Utils/utils';
 
 export default function CredsManager() {
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const cardContext = useContext(CardContext);
+
+  useEffect(() => {
+    console.log('USE_EFFECT_CRED');
+    if (
+      cardContext &&
+      cardContext.cardState &&
+      !isObjectEmpty(cardContext.cardState)
+    ) {
+      setIsFirstLoad(false);
+    } else {
+      setIsFirstLoad(true);
+    }
+  }, [cardContext.cardState]);
+
   // const navigateToTool = propEvent => {
   //   let navigate =
   //     propEvent.dataset && propEvent.dataset.nav ? propEvent.dataset.nav : null;
@@ -56,7 +74,10 @@ export default function CredsManager() {
         <CardGrid />
       </div>
 
-      <AddCardButton />
+      <AddCardButton
+        isFirstLoad={isFirstLoad}
+        cardDispatch={cardContext.cardDispatch}
+      />
     </div>
   );
 }

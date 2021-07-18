@@ -1,20 +1,20 @@
 import React, { useContext, useState } from 'react';
 import { Tooltip } from 'react-tippy';
 import Modal from 'react-modal';
-import { AuthContext, CardContext } from '../App';
+// import { AuthContext, CardContext } from '../App';
 
-function Header() {
-  const authContext = useContext(AuthContext);
-  const cardContext = useContext(CardContext);
+function Header({ authDispatch, cardDispatch }) {
+  // const authContext = useContext(AuthContext);
+  // const cardContext = useContext(CardContext);
 
   const [modalIsOpen, setIsOpen] = React.useState(true);
 
   const handleLogout = () => {
-    authContext.authDispatch({
+    authDispatch({
       type: 'LOGOUT_USER'
     });
 
-    cardContext.cardDispatch({
+    cardDispatch({
       type: 'CLEAR_DATA'
     });
 
@@ -33,6 +33,8 @@ function Header() {
       // transform: 'translate(-50%, -50%)'
     }
   };
+
+  console.log('HEADER');
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-4">

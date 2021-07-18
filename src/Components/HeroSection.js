@@ -1,12 +1,10 @@
 import React from 'react';
 
 function HeroSection({ title, description1, description2, getNavigation }) {
-  const navigateTool = e => {
-    e.preventDefault();
-    getNavigation(e.target);
-  };
-
-  console.log('HEROSECTION');
+  // const navigateTool = e => {
+  //   e.preventDefault();
+  //   getNavigation(e.target);
+  // };
 
   return (
     <section className="bg-teal-100 p-8 text-center">

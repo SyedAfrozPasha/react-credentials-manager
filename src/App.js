@@ -19,7 +19,7 @@ import 'react-tippy/dist/tippy.css';
 import PrivateRoute from './Components/PrivateRoute';
 import PublicRoute from './Components/PublicRoute';
 
-import LandingPage from './Components/LandingPage';
+// import LandingPage from './Components/LandingPage';
 
 import useDebounce from './Hooks/useDebounce';
 
@@ -28,6 +28,8 @@ import { authReducer, authInitializer } from './Redux/Auth/authReducer';
 
 // const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 const LoginScreen = React.lazy(() => import('./Components/Login'));
+const LandingPage = React.lazy(() => import('./Components/LandingPage'));
+// import LandingPage from './Components/LandingPage';
 
 export const CardContext = React.createContext();
 export const AuthContext = React.createContext();
