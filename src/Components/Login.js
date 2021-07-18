@@ -84,8 +84,6 @@ export default function Login() {
     setMPassword(e.target.value);
   };
 
-  console.log('LOGIN');
-
   return (
     <div className="flex flex-col min-h-screen bg-teal-600">
       <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5">

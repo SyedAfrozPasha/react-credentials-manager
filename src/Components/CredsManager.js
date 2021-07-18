@@ -60,6 +60,10 @@ export default function CredsManager() {
   //   }
   // };
 
+  const getData = () => {
+    return cardContext.cardState;
+  };
+
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
       <HeroSection
@@ -70,7 +74,12 @@ export default function CredsManager() {
       />
 
       <div id="tool-start" className="p-8">
-        <FileOperationButtons />
+        <FileOperationButtons
+          // cardData={cardContext.cardState}
+          isFirstLoad={isFirstLoad}
+          cardDispatch={cardContext.cardDispatch}
+          getData={getData}
+        />
         <CardGrid />
       </div>
 

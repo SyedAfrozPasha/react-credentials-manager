@@ -1,32 +1,21 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import CryptoJS from 'crypto-js';
 import { toast } from 'react-toastify';
-import { CardContext } from '../App';
+import { isObjectEmpty } from '../Utils/utils';
+// import { CardContext } from '../App';
 
-export default function FileOpertaionButtons() {
-  const cardContext = useContext(CardContext);
-  const cardData = cardContext.cardState;
+function FileOpertaionButtons({ cardDispatch, isFirstLoad, getData }) {
+  // const cardContext = useContext(CardContext);
+  // const cardData = cardContext.cardState;
 
-  const isObjectEmpty = obj => {
-    return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
-  };
+  // const initialSaveValue = cardData && isObjectEmpty(cardData) ? true : false;
 
-  const initialSaveValue =
-    cardContext && cardContext.cardState && isObjectEmpty(cardContext.cardState)
-      ? true
-      : false;
+  const [isSaveDisabled, setIsSaveDisabled] = useState(isFirstLoad);
 
-  const [isSaveDisabled, setIsSaveDisabled] = useState(initialSaveValue);
-
-  useEffect(() => {
-    const updatedSaveValue =
-      cardContext &&
-      cardContext.cardState &&
-      isObjectEmpty(cardContext.cardState)
-        ? true
-        : false;
-    setIsSaveDisabled(updatedSaveValue);
-  }, [cardContext.cardState]);
+  // useEffect(() => {
+  //   const updatedSaveValue = cardData && isObjectEmpty(cardData) ? true : false;
+  //   setIsSaveDisabled(updatedSaveValue);
+  // }, [cardData]);
 
   const inputFile = useRef(null);
 
@@ -66,7 +55,7 @@ export default function FileOpertaionButtons() {
               ).toString();
               localStorage.setItem('data', JSON.stringify(ciphertext));
 
-              cardContext.cardDispatch({
+              cardDispatch({
                 type: 'ADD_DATA',
                 payload: {
                   data
@@ -110,7 +99,10 @@ export default function FileOpertaionButtons() {
 
   const handleSaveToSystem = (e, filename = 'kreman-user-data') => {
     let isEncrypted = false;
-    let fileData = JSON.stringify(cardData);
+
+    let data = getData();
+    let fileData = JSON.stringify(data);
+    // let fileData = JSON.stringify(cardData);
 
     if (
       e.target &&
@@ -136,6 +128,8 @@ export default function FileOpertaionButtons() {
     link.href = url;
     link.click();
   };
+
+  console.log('FILE_OP_BTN');
 
   return (
     <div className="flex flex-row-reverse mb-8">
@@ -234,3 +228,5 @@ export default function FileOpertaionButtons() {
     </div>
   );
 }
+
+export default React.memo(FileOpertaionButtons);
