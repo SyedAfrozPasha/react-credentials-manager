@@ -24,13 +24,25 @@ function Header({ authDispatch, cardDispatch }) {
 
   const customStyles = {
     content: {
-      top: 'auto',
-      left: '0',
-      right: '0',
-      bottom: '0',
-      height: '200px'
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      padding: 0,
+      border: 0,
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, .25)'
+      // top: 'auto',
+      // left: '0',
+      // right: '0',
+      // bottom: '0'
+      // height: '200px',
       // marginRight: '-50%',
       // transform: 'translate(-50%, -50%)'
+    },
+    overlay: {
+      // backgroundColor: '#b2f5ea'
     }
   };
 
@@ -76,9 +88,28 @@ function Header({ authDispatch, cardDispatch }) {
           </button>
         </Tooltip>
       </div>
-      {/* <Modal isOpen={modalIsOpen} style={customStyles}>
-        <div>I am a modal</div>
-      </Modal> */}
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        // className="mx-auto h-48 box border rounded shadow-2xl bg-teal-600 px-3 py-2 border-b outline-none"
+      >
+        <div className="box border rounded flex flex-col bg-white">
+          <div className="bg-grey-lighter px-3 py-2 border-b">
+            <span className="text-sm text-gray-700 font-medium">Delete</span>
+          </div>
+          <div className="bg-grey-lighter px-3 py-2">
+            <div>Are you sure you want to delete?</div>
+          </div>
+          <div className="bg-grey-lighter px-3 py-2">
+            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              Cancel
+            </button>
+            <button class="bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Delete
+            </button>
+          </div>
+        </div>
+      </Modal>
     </nav>
   );
 }
