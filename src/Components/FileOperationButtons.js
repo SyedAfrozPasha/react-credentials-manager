@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import CryptoJS from 'crypto-js';
+import React, { useRef, useMemo } from 'react';
+// import CryptoJS from 'crypto-js';
 import { toast } from 'react-toastify';
 
 function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
-  const [isSaveDisabled, setIsSaveDisabled] = useState(isFirstLoad);
-
-  useEffect(() => {
-    setIsSaveDisabled(isFirstLoad);
-  }, [isFirstLoad]);
-
   const inputFile = useRef(null);
 
   const uploadJSONFile = () => {
@@ -108,7 +102,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
     link.click();
   };
 
-  console.log('FILE_OP_BTN');
+  // console.log('FILE_OP_BTN');
 
   return useMemo(() => {
     console.log('FILE_USEMEMO');
@@ -147,12 +141,12 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
         </button>
         <div
           className={`hover:block inline-block relative ml-2 ${
-            isSaveDisabled ? 'cursor-not-allowed' : 'dropdown'
+            isFirstLoad ? 'cursor-not-allowed' : 'dropdown'
           }`}
         >
           <button
             className={`bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center ${
-              isSaveDisabled ? 'cursor-not-allowed' : ''
+              isFirstLoad ? 'cursor-not-allowed' : ''
             }`}
           >
             <svg
@@ -182,7 +176,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
           </button>
           <ul
             className={`absolute hidden text-gray-700 pt-1 z-10 ${
-              isSaveDisabled ? 'cursor-not-allowed' : 'dropdown-menu'
+              isFirstLoad ? 'cursor-not-allowed' : 'dropdown-menu'
             }`}
           >
             <li className="">
@@ -209,7 +203,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
         </div>
       </div>
     );
-  }, [isSaveDisabled]);
+  }, [isFirstLoad]);
 
   // return (
   //   <div className="flex flex-row-reverse mb-8">

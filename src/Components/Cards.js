@@ -73,7 +73,7 @@ export default function Cards({ cardID }) {
           value={cardName || ''}
           onChange={updateCardName}
         />
-        <span className="relative inline-flex rounded-md shadow-sm">
+        <span className="relative inline-flex rounded-md">
           <Tooltip title="Add Input Field">
             <button
               // title="Add Input Field"
