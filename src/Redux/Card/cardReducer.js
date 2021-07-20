@@ -11,12 +11,6 @@ import {
   UPDATE_INPUT_FIELD
 } from './cardType';
 
-// const generatedRandomString = (len = 36) => {
-//   return Math.random()
-//     .toString(len)
-//     .slice(2);
-// };
-
 const removeCardLogic = (state, action) => {
   if (action && action.payload) {
     const cardState = { ...state };
