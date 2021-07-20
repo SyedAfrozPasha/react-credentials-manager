@@ -11,7 +11,6 @@ export default function CredsManager() {
   const cardContext = useContext(CardContext);
 
   useEffect(() => {
-    console.log('USE_EFFECT_CRED');
     if (
       cardContext &&
       cardContext.cardState &&
