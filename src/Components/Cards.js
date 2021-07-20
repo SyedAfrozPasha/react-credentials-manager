@@ -63,7 +63,7 @@ export default function Cards({ cardID }) {
   };
 
   return (
-    <div className="box border rounded flex flex-col shadow bg-white">
+    <div className="box border rounded flex flex-col shadow-lg bg-white">
       <div className="bg-gray-lighter px-3 py-2 border-b flex flex-wrap justify-between">
         <input
           className="appearance-none block w-2/3 text-gray-700 rounded py-2 font-bold leading-tight focus:outline-none"
@@ -77,7 +77,7 @@ export default function Cards({ cardID }) {
           <Tooltip title="Add Input Field">
             <button
               // title="Add Input Field"
-              className="p-0 w-8 h-8 bg-gray-600 rounded-full hover:bg-teal-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              className="p-0 w-8 h-8 bg-teal-600 rounded-full hover:bg-teal-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
               onClick={addInputField}
             >
               <svg
@@ -97,7 +97,7 @@ export default function Cards({ cardID }) {
           <Tooltip title="Delete Card">
             <button
               // title="Delete this card"
-              className="p-0 ml-1 w-8 h-8 bg-gray-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white"
+              className="p-0 ml-1 w-8 h-8 bg-red-700 rounded-full hover:bg-red-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white"
               onClick={removeCard}
               style={{ paddingLeft: '6px' }}
             >
