@@ -224,7 +224,7 @@ export const cardReducer = (state, action) => {
       return updateInputFields(state, action);
 
     default:
-      updateLocalStorage(state);
+      // updateLocalStorage(state);
       return state;
   }
 };

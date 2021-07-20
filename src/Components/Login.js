@@ -19,8 +19,6 @@ export default function Login() {
   const handleLogin = e => {
     e.preventDefault();
 
-    console.log('LOGIN BUTTON');
-
     if (
       mpassword &&
       validator.isStrongPassword(mpassword, {
@@ -53,6 +51,9 @@ export default function Login() {
           pauseOnHover: true,
           draggable: true
         });
+
+        console.log('token:::', token);
+        console.log('local data:::', localStorage.getItem('data'));
 
         if (localStorage.getItem('data') && token) {
           let ciphertext = JSON.parse(localStorage.getItem('data'));
