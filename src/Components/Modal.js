@@ -42,13 +42,13 @@ export default function Modal({
         </div>
         <div className="flex justify-end bg-grey-lighter px-4 py-2">
           <button
-            class="bg-transparent hover:bg-teal-500 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded"
+            className="bg-transparent hover:bg-teal-500 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded"
             onClick={onModalClose}
           >
             Cancel
           </button>
           <button
-            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 ml-2 rounded"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 ml-2 rounded"
             onClick={onModalButtonAction}
           >
             {buttonTitle}

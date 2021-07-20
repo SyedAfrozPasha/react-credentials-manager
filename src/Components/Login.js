@@ -13,7 +13,7 @@ export default function Login() {
   const loginInputRef = useRef(null);
 
   useEffect(() => {
-    // loginInputRef.current.focus();
+    loginInputRef.current.focus();
   }, []);
 
   const handleLogin = e => {
@@ -43,6 +43,15 @@ export default function Login() {
           payload: {
             token
           }
+        });
+
+        toast.success('Welcome!', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
         });
 
         if (localStorage.getItem('data') && token) {
