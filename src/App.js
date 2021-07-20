@@ -40,17 +40,17 @@ export default function App() {
     cardInitializer
   );
 
-  const debouncedCardState = useDebounce(cardState, 1000);
+  // const debouncedCardState = useDebounce(cardState, 1000);
 
-  useEffect(() => {
-    if (authState.token) {
-      let ciphertext = CryptoJS.AES.encrypt(
-        JSON.stringify(debouncedCardState),
-        secretToken
-      ).toString();
-      localStorage.setItem('data', JSON.stringify(ciphertext));
-    }
-  }, [debouncedCardState]);
+  // useEffect(() => {
+  //   if (authState.token) {
+  //     let ciphertext = CryptoJS.AES.encrypt(
+  //       JSON.stringify(debouncedCardState),
+  //       secretToken
+  //     ).toString();
+  //     localStorage.setItem('data', JSON.stringify(ciphertext));
+  //   }
+  // }, [debouncedCardState]);
 
   useEffect(() => {
     if (

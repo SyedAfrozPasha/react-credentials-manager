@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import { generatedRandomString } from '../../Utils/utils';
 import {
   ADD_CARD,
   REMOVE_CARD,
@@ -10,19 +11,20 @@ import {
   UPDATE_INPUT_FIELD
 } from './cardType';
 
-const generatedRandomString = (len = 36) => {
-  return Math.random()
-    .toString(len)
-    .slice(2);
-};
+// const generatedRandomString = (len = 36) => {
+//   return Math.random()
+//     .toString(len)
+//     .slice(2);
+// };
 
 const removeCardLogic = (state, action) => {
   if (action && action.payload) {
     const cardState = { ...state };
     delete cardState[action.payload];
+    updateLocalStorage(cardState);
     return cardState;
   }
-
+  updateLocalStorage(state);
   return state;
 };
 
@@ -32,20 +34,26 @@ const updateCardLogic = (state, action) => {
     const fieldData = cardState[action.payload.cardID];
     if (fieldData && fieldData.length > 0) {
       const cardObj = fieldData.map(field => {
-        return {
+        let data = {
           ...field,
           cardName: action.payload.cardName
         };
+        updateLocalStorage(data);
+        return data;
       });
 
-      return {
+      let cardData = {
         ...cardState,
         [action.payload.cardID]: cardObj
       };
+      updateLocalStorage(cardData);
+      return cardData;
     }
+    updateLocalStorage(cardState);
     return cardState;
   }
 
+  updateLocalStorage(state);
   return state;
 };
 
@@ -62,12 +70,15 @@ const removeInputField = (state, action) => {
 
       cardState[action.payload.cardID] = fieldData;
 
+      updateLocalStorage(cardState);
       return cardState;
     }
 
+    updateLocalStorage(state);
     return state;
   }
 
+  updateLocalStorage(state);
   return state;
 };
 
@@ -99,11 +110,14 @@ const updateInputFields = (state, action) => {
         fieldData[objIndex].isMasked = action.payload.isMasked;
       }
 
+      updateLocalStorage(cardState);
       return cardState;
     } else {
+      updateLocalStorage(state);
       return state;
     }
   } else {
+    updateLocalStorage(state);
     return state;
   }
 };
@@ -136,19 +150,40 @@ export const cardInitializer = (initialValue = {}) => {
   }
 };
 
+const authToken = localStorage.getItem('token')
+  ? JSON.parse(localStorage.getItem('token'))
+  : null;
+
+const updateLocalStorage = state => {
+  if (authToken) {
+    let words = CryptoJS.enc.Base64.parse(authToken);
+    let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
+
+    let ciphertext = CryptoJS.AES.encrypt(
+      JSON.stringify(state),
+      sToken
+    ).toString();
+    localStorage.setItem('data', JSON.stringify(ciphertext));
+  }
+};
+
 export const cardReducer = (state, action) => {
   switch (action.type) {
     case ADD_DATA:
-      return {
+      let add_data = {
         ...state,
         ...action.payload.data
       };
+      updateLocalStorage(add_data);
+      return add_data;
 
     case CLEAR_DATA:
-      return {};
+      let clear_data = {};
+      updateLocalStorage(clear_data);
+      return clear_data;
 
     case ADD_CARD:
-      return {
+      let add_card_data = {
         ...state,
         [action.payload]: [
           {
@@ -160,6 +195,8 @@ export const cardReducer = (state, action) => {
           }
         ]
       };
+      updateLocalStorage(add_card_data);
+      return add_card_data;
 
     case REMOVE_CARD:
       return removeCardLogic(state, action);
@@ -183,7 +220,7 @@ export const cardReducer = (state, action) => {
           ]
         ]
       };
-
+      updateLocalStorage(returnObj);
       return returnObj;
 
     case REMOVE_INPUT_FIELD:
@@ -193,6 +230,7 @@ export const cardReducer = (state, action) => {
       return updateInputFields(state, action);
 
     default:
+      updateLocalStorage(state);
       return state;
   }
 };
