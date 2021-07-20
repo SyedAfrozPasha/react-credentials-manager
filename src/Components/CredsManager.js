@@ -64,8 +64,6 @@ export default function CredsManager() {
   //   return cardContext.cardState;
   // };
 
-  const getData = useCallback(() => cardContext.cardState, []);
-
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
       <HeroSection
