@@ -1,7 +1,6 @@
-import React, { useReducer, useEffect, useState, Suspense } from 'react';
+import React, { useReducer, Suspense } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import CryptoJS from 'crypto-js';
 import Modal from 'react-modal';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
@@ -10,8 +9,6 @@ import 'react-tippy/dist/tippy.css';
 
 import PrivateRoute from './Components/PrivateRoute';
 import PublicRoute from './Components/PublicRoute';
-
-import useDebounce from './Hooks/useDebounce';
 
 import { cardReducer, cardInitializer } from './Redux/Card/cardReducer';
 import { authReducer, authInitializer } from './Redux/Auth/authReducer';
@@ -26,8 +23,6 @@ toast.configure();
 Modal.setAppElement('#root');
 
 export default function App() {
-  const [secretToken, setSecretToken] = useState('');
-
   const [authState, authDispatch] = useReducer(
     authReducer,
     { token: null, isLoggedIn: false },
@@ -39,21 +34,6 @@ export default function App() {
     {},
     cardInitializer
   );
-
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem('token') &&
-  //     JSON.parse(localStorage.getItem('token'))
-  //   ) {
-  //     let encryptedToken = JSON.parse(localStorage.getItem('token'));
-  //     let words = encryptedToken
-  //       ? CryptoJS.enc.Base64.parse(encryptedToken)
-  //       : null;
-  //     let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
-
-  //     setSecretToken(token);
-  //   }
-  // }, [authState.token]);
 
   return (
     <AuthContext.Provider

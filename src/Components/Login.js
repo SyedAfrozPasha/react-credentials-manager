@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import CryptoJS from 'crypto-js';
 import validator from 'validator';
 import { toast } from 'react-toastify';
+import Footer from './Footer';
 import { AuthContext, CardContext } from '../App';
 
 export default function Login() {
@@ -169,6 +170,7 @@ export default function Login() {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }
