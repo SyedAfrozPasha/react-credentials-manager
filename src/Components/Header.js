@@ -7,7 +7,7 @@ function Header({ authDispatch, cardDispatch }) {
   // const authContext = useContext(AuthContext);
   // const cardContext = useContext(CardContext);
 
-  const [modalIsOpen, setIsOpen] = React.useState(true);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   const handleLogout = () => {
     authDispatch({
@@ -33,16 +33,6 @@ function Header({ authDispatch, cardDispatch }) {
       padding: 0,
       border: 0,
       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, .25)'
-      // top: 'auto',
-      // left: '0',
-      // right: '0',
-      // bottom: '0'
-      // height: '200px',
-      // marginRight: '-50%',
-      // transform: 'translate(-50%, -50%)'
-    },
-    overlay: {
-      // backgroundColor: '#b2f5ea'
     }
   };
 
@@ -88,23 +78,27 @@ function Header({ authDispatch, cardDispatch }) {
           </button>
         </Tooltip>
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        style={customStyles}
-        // className="mx-auto h-48 box border rounded shadow-2xl bg-teal-600 px-3 py-2 border-b outline-none"
-      >
-        <div className="box border rounded flex flex-col bg-white">
-          <div className="bg-grey-lighter px-3 py-2 border-b">
-            <span className="text-sm text-gray-700 font-medium">Delete</span>
+      <Modal isOpen={modalIsOpen} style={customStyles}>
+        <div className="box border border-teal-500 rounded flex flex-col bg-white">
+          <div className="flex justify-start bg-grey-lighter px-4 py-2 border-b">
+            <svg
+              className="fill-current h-4 w-4 text-red-500 mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              style={{ marginTop: '0.3rem' }}
+            >
+              <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+            </svg>
+            <span className="text-base text-gray-700 font-medium">Delete</span>
           </div>
-          <div className="bg-grey-lighter px-3 py-2">
+          <div className="bg-grey-lighter px-4 py-2">
             <div>Are you sure you want to delete?</div>
           </div>
-          <div className="bg-grey-lighter px-3 py-2">
-            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          <div className="flex justify-end bg-grey-lighter px-4 py-2">
+            <button class="bg-transparent hover:bg-teal-500 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded">
               Cancel
             </button>
-            <button class="bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 ml-2 rounded">
               Delete
             </button>
           </div>
