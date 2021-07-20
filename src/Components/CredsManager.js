@@ -77,10 +77,9 @@ export default function CredsManager() {
 
       <div id="tool-start" className="p-8">
         <FileOperationButtons
-          // cardData={cardContext.cardState}
+          cardData={cardContext.cardState}
           isFirstLoad={isFirstLoad}
           cardDispatch={cardContext.cardDispatch}
-          getData={getData}
         />
         <CardGrid />
       </div>
