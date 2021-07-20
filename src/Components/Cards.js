@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import InputField from './InputField';
 import Modal from './Modal';
 import { CardContext } from '../App';
-import useDebounce from '../Hooks/useDebounce';
+// import useDebounce from '../Hooks/useDebounce';
 
 export default function Cards({ cardID }) {
   const cardContext = useContext(CardContext);
@@ -20,15 +20,15 @@ export default function Cards({ cardID }) {
   );
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
-  const debouncedTitle = useDebounce(cardName, 500);
+  // const debouncedTitle = useDebounce(cardName, 500);
 
-  useEffect(() => {
-    cardContext.cardDispatch({
-      type: 'UPDATE_CARD',
-      payload: { cardID, cardName: debouncedTitle }
-    });
-    setCardName(debouncedTitle);
-  }, [debouncedTitle]);
+  // useEffect(() => {
+  //   cardContext.cardDispatch({
+  //     type: 'UPDATE_CARD',
+  //     payload: { cardID, cardName: debouncedTitle }
+  //   });
+  //   setCardName(debouncedTitle);
+  // }, [debouncedTitle]);
 
   const removeCard = () => {
     toast.success('Card Removed!', {
@@ -73,6 +73,17 @@ export default function Cards({ cardID }) {
     });
   };
 
+  const saveCardName = event => {
+    console.log('onBlurEvent:', event.target.value);
+    if (event.target.value) {
+      setCardName(event.target.value);
+      cardContext.cardDispatch({
+        type: 'UPDATE_CARD',
+        payload: { cardID, cardName: event.target.value }
+      });
+    }
+  };
+
   return (
     <div className="box border rounded flex flex-col shadow-lg bg-white">
       <div className="bg-gray-lighter px-3 py-2 border-b flex flex-wrap justify-between">
@@ -82,6 +93,7 @@ export default function Cards({ cardID }) {
           type="text"
           placeholder="Card Title"
           value={cardName || ''}
+          onBlur={saveCardName}
           onChange={updateCardName}
         />
         <span className="relative inline-flex rounded-md">
