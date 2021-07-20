@@ -75,13 +75,11 @@ export default function Cards({ cardID }) {
 
   const saveCardName = event => {
     console.log('onBlurEvent:', event.target.value);
-    if (event.target.value) {
-      setCardName(event.target.value);
-      cardContext.cardDispatch({
-        type: 'UPDATE_CARD',
-        payload: { cardID, cardName: event.target.value }
-      });
-    }
+    setCardName(event.target.value);
+    cardContext.cardDispatch({
+      type: 'UPDATE_CARD',
+      payload: { cardID, cardName: event.target.value }
+    });
   };
 
   return (
@@ -154,6 +152,7 @@ export default function Cards({ cardID }) {
                   cardID={cardID}
                   fieldData={val}
                   uniqueKey={val.fieldID}
+                  cardDispatch={cardContext.cardDispatch}
                 />
               );
             }

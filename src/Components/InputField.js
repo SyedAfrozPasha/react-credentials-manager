@@ -2,67 +2,88 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import Modal from './Modal';
-import { CardContext } from '../App';
-import useDebounce from '../Hooks/useDebounce';
+// import { CardContext } from '../App';
+// import useDebounce from '../Hooks/useDebounce';
 
-export default function InputField({ cardID, uniqueKey, fieldData }) {
+export default function InputField({
+  cardID,
+  uniqueKey,
+  fieldData,
+  cardDispatch
+}) {
   const [maskInput, setMaskInput] = useState(fieldData.isMasked || false);
   const [enableCopy, setEnableCopy] = useState(true);
   const [fieldValue, setFieldValue] = useState(fieldData.fieldValue || '');
   const [fieldName, setFieldName] = useState(fieldData.fieldName || '');
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
-  const cardContext = useContext(CardContext);
+  // const cardContext = useContext(CardContext);
 
-  const debouncedFieldValue = useDebounce(fieldValue, 500);
+  // const debouncedFieldValue = useDebounce(fieldValue, 500);
 
-  useEffect(() => {
-    if (debouncedFieldValue && fieldData && fieldData.fieldID) {
-      cardContext.cardDispatch({
-        type: 'UPDATE_INPUT_FIELD',
-        payload: {
-          cardID,
-          fieldID: fieldData.fieldID,
-          fieldValue: debouncedFieldValue
-        }
-      });
-    }
-  }, [debouncedFieldValue]);
+  // useEffect(() => {
+  //   if (debouncedFieldValue && fieldData && fieldData.fieldID) {
+  //     cardDispatch({
+  //       type: 'UPDATE_INPUT_FIELD',
+  //       payload: {
+  //         cardID,
+  //         fieldID: fieldData.fieldID,
+  //         fieldValue: debouncedFieldValue
+  //       }
+  //     });
+  //   }
+  // }, [debouncedFieldValue]);
 
-  const debouncedFieldName = useDebounce(fieldName, 500);
+  // const debouncedFieldName = useDebounce(fieldName, 500);
 
-  useEffect(() => {
-    if (debouncedFieldName && fieldData && fieldData.fieldID) {
-      cardContext.cardDispatch({
-        type: 'UPDATE_INPUT_FIELD',
-        payload: {
-          cardID,
-          fieldID: fieldData.fieldID,
-          fieldName: debouncedFieldName
-        }
-      });
-    }
-  }, [debouncedFieldName]);
+  // useEffect(() => {
+  //   if (debouncedFieldName && fieldData && fieldData.fieldID) {
+  //     cardDispatch({
+  //       type: 'UPDATE_INPUT_FIELD',
+  //       payload: {
+  //         cardID,
+  //         fieldID: fieldData.fieldID,
+  //         fieldName: debouncedFieldName
+  //       }
+  //     });
+  //   }
+  // }, [debouncedFieldName]);
 
-  useEffect(() => {
-    if (fieldData && fieldData.fieldID) {
-      cardContext.cardDispatch({
-        type: 'UPDATE_INPUT_FIELD',
-        payload: {
-          cardID,
-          fieldID: fieldData.fieldID,
-          isMasked: maskInput
-        }
-      });
-    }
-  }, [maskInput]);
+  // useEffect(() => {
+  //   if (fieldData && fieldData.fieldID) {
+  //     cardDispatch({
+  //       type: 'UPDATE_INPUT_FIELD',
+  //       payload: {
+  //         cardID,
+  //         fieldID: fieldData.fieldID,
+  //         isMasked: maskInput
+  //       }
+  //     });
+  //   }
+  // }, [maskInput]);
 
   const togglePassword = (e, id) => {
     e.preventDefault();
     if (maskInput) {
       setMaskInput(false);
+      cardDispatch({
+        type: 'UPDATE_INPUT_FIELD',
+        payload: {
+          cardID,
+          fieldID: fieldData.fieldID,
+          isMasked: false
+        }
+      });
     } else {
       setMaskInput(true);
+      cardDispatch({
+        type: 'UPDATE_INPUT_FIELD',
+        payload: {
+          cardID,
+          fieldID: fieldData.fieldID,
+          isMasked: true
+        }
+      });
     }
   };
 
@@ -87,7 +108,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
       pauseOnHover: true,
       draggable: true
     });
-    cardContext.cardDispatch({
+    cardDispatch({
       type: 'REMOVE_INPUT_FIELD',
       payload: {
         cardID,
@@ -109,8 +130,34 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
     setFieldValue(event.target.value);
   };
 
+  const saveFieldValue = event => {
+    console.log('saveFieldValue:', event.target.value);
+    setFieldValue(event.target.value);
+    cardDispatch({
+      type: 'UPDATE_INPUT_FIELD',
+      payload: {
+        cardID,
+        fieldID: fieldData.fieldID,
+        fieldValue: event.target.value
+      }
+    });
+  };
+
   const updateFieldName = event => {
     setFieldName(event.target.value);
+  };
+
+  const saveFieldName = event => {
+    console.log('saveFieldName:', event.target.value);
+    setFieldName(event.target.value);
+    cardDispatch({
+      type: 'UPDATE_INPUT_FIELD',
+      payload: {
+        cardID,
+        fieldID: fieldData.fieldID,
+        fieldName: event.target.value
+      }
+    });
   };
 
   return (
@@ -121,6 +168,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
           placeholder="Field Name"
           value={fieldName}
           onChange={updateFieldName}
+          onBlur={saveFieldName}
         />
         <Tooltip title="Delete Input Field">
           <span
@@ -265,6 +313,7 @@ export default function InputField({ cardID, uniqueKey, fieldData }) {
           spellCheck={false}
           value={fieldValue}
           onChange={updateFieldValue}
+          onBlur={saveFieldValue}
         />
       </div>
 
