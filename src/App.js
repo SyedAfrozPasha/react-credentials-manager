@@ -1,10 +1,5 @@
 import React, { useReducer, useEffect, useState, Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CryptoJS from 'crypto-js';
 import Modal from 'react-modal';
@@ -13,23 +8,16 @@ import './style.css';
 
 import 'react-tippy/dist/tippy.css';
 
-// import Header from './Components/Header';
-// import Footer from './Components/Footer';
-
 import PrivateRoute from './Components/PrivateRoute';
 import PublicRoute from './Components/PublicRoute';
-
-// import LandingPage from './Components/LandingPage';
 
 import useDebounce from './Hooks/useDebounce';
 
 import { cardReducer, cardInitializer } from './Redux/Card/cardReducer';
 import { authReducer, authInitializer } from './Redux/Auth/authReducer';
 
-// const CredsManager = React.lazy(() => import('./Components/CredsManager'));
 const LoginScreen = React.lazy(() => import('./Components/Login'));
 const LandingPage = React.lazy(() => import('./Components/LandingPage'));
-// import LandingPage from './Components/LandingPage';
 
 export const CardContext = React.createContext();
 export const AuthContext = React.createContext();
@@ -75,9 +63,6 @@ export default function App() {
         : null;
       let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
 
-      // let encryptedToken = localStorage.getItem('token');
-      // let bytes = CryptoJS.AES.decrypt(encryptedToken, '$ecRet_Key@1234');
-      // let token = bytes.toString(CryptoJS.enc.Utf8);
       setSecretToken(token);
     }
   }, [authState.token]);
@@ -98,19 +83,6 @@ export default function App() {
         <Router>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              {/* <Route exact path="/">
-                <LandingPage />
-              </Route>
-              <Route exact path="/login">
-                <LoginScreen />
-              </Route>
-              <Redirect exact from="/" to="login" /> */}
-              {/* <PublicRoute
-                restricted={false}
-                component={LoginScreen}
-                path="/login"
-                exact
-              /> */}
               <PublicRoute path="/login" exact restricted={false}>
                 <LoginScreen />
               </PublicRoute>

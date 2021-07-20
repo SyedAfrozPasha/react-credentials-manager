@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'react-tippy';
 import { toast } from 'react-toastify';
 import Modal from './Modal';
