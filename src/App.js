@@ -40,32 +40,20 @@ export default function App() {
     cardInitializer
   );
 
-  // const debouncedCardState = useDebounce(cardState, 1000);
-
   // useEffect(() => {
-  //   if (authState.token) {
-  //     let ciphertext = CryptoJS.AES.encrypt(
-  //       JSON.stringify(debouncedCardState),
-  //       secretToken
-  //     ).toString();
-  //     localStorage.setItem('data', JSON.stringify(ciphertext));
+  //   if (
+  //     localStorage.getItem('token') &&
+  //     JSON.parse(localStorage.getItem('token'))
+  //   ) {
+  //     let encryptedToken = JSON.parse(localStorage.getItem('token'));
+  //     let words = encryptedToken
+  //       ? CryptoJS.enc.Base64.parse(encryptedToken)
+  //       : null;
+  //     let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
+
+  //     setSecretToken(token);
   //   }
-  // }, [debouncedCardState]);
-
-  useEffect(() => {
-    if (
-      localStorage.getItem('token') &&
-      JSON.parse(localStorage.getItem('token'))
-    ) {
-      let encryptedToken = JSON.parse(localStorage.getItem('token'));
-      let words = encryptedToken
-        ? CryptoJS.enc.Base64.parse(encryptedToken)
-        : null;
-      let token = words ? CryptoJS.enc.Utf8.stringify(words) : null;
-
-      setSecretToken(token);
-    }
-  }, [authState.token]);
+  // }, [authState.token]);
 
   return (
     <AuthContext.Provider

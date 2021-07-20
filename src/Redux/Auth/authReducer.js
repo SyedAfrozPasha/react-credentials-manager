@@ -5,13 +5,6 @@ export const authInitializer = (
   initialValue = { token: null, isLoggedIn: false }
 ) => {
   try {
-    // if (!localStorage.getItem('token')) {
-    //   return initialValue;
-    // }
-
-    // let ciphertext = JSON.parse(localStorage.getItem('token'));
-    // let bytes = CryptoJS.AES.decrypt(ciphertext, '$ecRet_Key@1234');
-    // let token = bytes.toString(CryptoJS.enc.Utf8);
     let token = JSON.parse(localStorage.getItem('token'));
     let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
 
@@ -26,23 +19,34 @@ export const authInitializer = (
   }
 };
 
+const updateLocalStorage = state => {
+  let { token, isLoggedIn } = state;
+  localStorage.setItem('token', JSON.stringify(token));
+  localStorage.setItem('isLoggedIn', isLoggedIn);
+};
+
 export const authReducer = (state, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return {
+      let login_user_data = {
         ...state,
         token: action.payload.token,
         isLoggedIn: true
       };
+      updateLocalStorage(login_user_data);
+      return login_user_data;
 
     case LOGOUT_USER:
-      return {
+      let logout_user_data = {
         ...state,
         token: null,
         isLoggedIn: false
       };
+      updateLocalStorage(logout_user_data);
+      return logout_user_data;
 
     default:
+      updateLocalStorage(state);
       return state;
   }
 };
