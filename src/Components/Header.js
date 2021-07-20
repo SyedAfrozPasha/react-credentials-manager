@@ -72,7 +72,7 @@ function Header({ authDispatch, cardDispatch }) {
       </div>
 
       <Modal
-        modalIsOpen={modalIsOpen}
+        modalIsOpen={true}
         title="Logout"
         message="Are you sure you want to logout?"
         buttonTitle="Logout"

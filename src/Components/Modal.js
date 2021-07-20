@@ -18,8 +18,8 @@ export default function Modal({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       padding: 0,
-      border: 0,
-      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, .25)'
+      border: 0
+      // boxShadow: '0 25px 50px -12px rgba(0, 0, 0, .25)'
     },
     overlay: {
       backgroundColor: 'rgb(0 0 0 / 75%)'
@@ -28,7 +28,7 @@ export default function Modal({
 
   return (
     <Modal isOpen={modalIsOpen} style={customStyles}>
-      <div className="box border border-teal-500 rounded flex flex-col bg-teal-600">
+      <div className="box border-teal-500 rounded flex flex-col bg-teal-600">
         <div className="flex justify-start bg-grey-lighter px-4 py-2 border-b border-gray-800">
           <svg
             className="fill-current h-4 w-4 text-gray-900 mr-1"
