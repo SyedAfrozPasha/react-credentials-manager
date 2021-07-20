@@ -60,11 +60,15 @@ export default function Login() {
           let words = CryptoJS.enc.Base64.parse(token);
           let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
 
+          console.log('sToken:', sToken);
+
           let bytes = sToken ? CryptoJS.AES.decrypt(ciphertext, sToken) : null;
 
           let decryptedData = bytes
             ? JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
             : {};
+
+          console.log('decryptedData:', decryptedData);
 
           cardContext.cardDispatch({
             type: 'ADD_DATA',

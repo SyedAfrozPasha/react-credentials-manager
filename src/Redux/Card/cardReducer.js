@@ -173,7 +173,7 @@ export const cardReducer = (state, action) => {
 
     case CLEAR_DATA:
       let clear_data = {};
-      updateLocalStorage(clear_data);
+      // updateLocalStorage(clear_data);
       return clear_data;
 
     case ADD_CARD:
