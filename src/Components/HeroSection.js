@@ -26,13 +26,13 @@ function HeroSection({ title, description1, description2, getNavigation }) {
         >
           Learn More
         </button>
-        <button
-          data-nav="tool-start"
+        <Link
+          to="/login"
           className="py-3 px-8 mb-2 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
-          onClick={navigateTool}
+          // onClick={navigateTool}
         >
           Get Started
-        </button>
+        </Link>
       </div>
     </section>
   );

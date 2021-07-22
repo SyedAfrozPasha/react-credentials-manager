@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import CryptoJS from 'crypto-js';
 import validator from 'validator';
 import { toast } from 'react-toastify';
+import Header from './Header';
 import Footer from './Footer';
 import { AuthContext, CardContext } from '../App';
 
@@ -101,6 +102,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col min-h-screen bg-teal-600">
+      <Header />
       <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5">
         <div>
           <div className="flex items-center justify-center flex-wrap">
