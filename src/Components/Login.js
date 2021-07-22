@@ -103,7 +103,7 @@ export default function Login() {
   return (
     <div className="flex flex-col min-h-screen bg-teal-600">
       <Header />
-      <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5">
+      <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5 mt-10 mb-15">
         <div>
           <div className="flex items-center justify-center flex-wrap">
             <div className="flex items-center flex-shrink-0 text-gray-800">
