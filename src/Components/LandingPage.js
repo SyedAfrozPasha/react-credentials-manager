@@ -16,7 +16,6 @@ export default function LandingPage() {
         authDispatch={authContext.authDispatch}
         cardDispatch={cardContext.cardDispatch}
         enableLoginButton={false}
-        isLoginPage={false}
       />
       <CredsManager />
       <Footer />

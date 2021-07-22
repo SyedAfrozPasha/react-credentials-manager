@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
 import validator from 'validator';
 import { toast } from 'react-toastify';
-import Header from './Header';
 import Footer from './Footer';
 import { AuthContext, CardContext } from '../App';
 
@@ -54,9 +54,6 @@ export default function Login() {
           draggable: true
         });
 
-        console.log('token:::', token);
-        console.log('local data:::', localStorage.getItem('data'));
-
         if (localStorage.getItem('data') && token) {
           let ciphertext = JSON.parse(localStorage.getItem('data'));
 
@@ -102,24 +99,25 @@ export default function Login() {
 
   return (
     <div className="flex flex-col min-h-screen bg-teal-600">
-      <Header />
-      <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5 mt-10 mb-15">
+      <div className="w-full max-w-xs m-auto bg-white shadow-2xl rounded p-5">
         <div>
           <div className="flex items-center justify-center flex-wrap">
-            <div className="flex items-center flex-shrink-0 text-gray-800">
-              <span className="font-semibold text-3xl tracking-tight mr-1">
-                Kreman
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="30"
-                height="30"
-              >
-                <path fill="none" d="M0 0h24v24H0z" />
-                <path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zm-2 0V7a4 4 0 1 0-8 0v1h8zm-5 6v2h2v-2h-2zm-4 0v2h2v-2H7zm8 0v2h2v-2h-2z" />
-              </svg>
-            </div>
+            <Link to="/">
+              <div className="flex items-center flex-shrink-0 text-gray-800">
+                <span className="font-semibold text-3xl tracking-tight mr-1">
+                  Kreman
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="30"
+                  height="30"
+                >
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zm-2 0V7a4 4 0 1 0-8 0v1h8zm-5 6v2h2v-2h-2zm-4 0v2h2v-2H7zm8 0v2h2v-2h-2z" />
+                </svg>
+              </div>
+            </Link>
           </div>
         </div>
         <div

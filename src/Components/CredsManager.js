@@ -65,13 +65,6 @@ export default function CredsManager() {
 
   return (
     <div className="min-h-screen min-v-screen bg-grey-lightest font-sans">
-      <HeroSection
-        title="Kreman - Simple Credential Manager"
-        description1="A simple credential managing tool to manage sensitive data such as passwords, card details, login details, etc."
-        description2="We repect your privacy. We do not store any of the user data on the servers. All the data is stored in the browser securely."
-        // getNavigation={navigateToTool}
-      />
-
       <div id="tool-start" className="p-8">
         <FileOperationButtons
           cardData={cardContext.cardState}

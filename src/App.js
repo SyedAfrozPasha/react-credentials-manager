@@ -58,7 +58,7 @@ export default function App() {
               <PublicRoute path="/login" exact restricted={false}>
                 <LoginScreen />
               </PublicRoute>
-              <PrivateRoute path="/dashboard" exact>
+              <PrivateRoute path="/app" exact>
                 <LandingPage />
               </PrivateRoute>
             </Switch>
