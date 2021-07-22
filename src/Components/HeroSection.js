@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function HeroSection({ title, description1, description2, getNavigation }) {
-  // const navigateTool = e => {
-  //   e.preventDefault();
-  //   getNavigation(e.target);
-  // };
+  const navigateTool = e => {
+    e.preventDefault();
+    // getNavigation(e.target);
+  };
 
   return (
     <section className="bg-teal-100 p-8 text-center">
@@ -15,7 +16,7 @@ function HeroSection({ title, description1, description2, getNavigation }) {
       <p className="text-gray-700 text-lg mb-4">{description1}</p>
       <p className="text-gray-700 text-lg mb-8">{description2}</p>
 
-      {/* <div className="flex flex-wrap justify-center space-x-2">
+      <div className="flex flex-wrap justify-center space-x-2">
         <button
           role="button"
           data-nav="tool-start"
@@ -23,7 +24,7 @@ function HeroSection({ title, description1, description2, getNavigation }) {
           className="py-3 px-8 mb-2 bg-gray-400 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg hover:shadow-xl transition duration-300 focus:outline-none"
           onClick={navigateTool}
         >
-          Try an example
+          Learn More
         </button>
         <button
           data-nav="tool-start"
@@ -32,7 +33,7 @@ function HeroSection({ title, description1, description2, getNavigation }) {
         >
           Get Started
         </button>
-      </div> */}
+      </div>
     </section>
   );
 }

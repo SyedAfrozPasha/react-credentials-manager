@@ -15,6 +15,7 @@ import { authReducer, authInitializer } from './Redux/Auth/authReducer';
 
 const LoginScreen = React.lazy(() => import('./Components/Login'));
 const LandingPage = React.lazy(() => import('./Components/LandingPage'));
+const HomePage = React.lazy(() => import('./Components/HomePage'));
 
 export const CardContext = React.createContext();
 export const AuthContext = React.createContext();
@@ -51,10 +52,13 @@ export default function App() {
         <Router>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
+              <PublicRoute path="/" exact restricted={false}>
+                <HomePage />
+              </PublicRoute>
               <PublicRoute path="/login" exact restricted={false}>
                 <LoginScreen />
               </PublicRoute>
-              <PrivateRoute path="/" exact>
+              <PrivateRoute path="/dashboard" exact>
                 <LandingPage />
               </PrivateRoute>
             </Switch>
