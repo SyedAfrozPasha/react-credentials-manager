@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import Modal from './Modal';
 // import { AuthContext, CardContext } from '../App';
 
-function Header({ authDispatch, cardDispatch }) {
+function Header({
+  authDispatch,
+  cardDispatch,
+  enableLoginButton,
+  isLoginPage
+}) {
   // const authContext = useContext(AuthContext);
   // const cardContext = useContext(CardContext);
 
@@ -46,30 +52,57 @@ function Header({ authDispatch, cardDispatch }) {
           <path d="M18 8h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a6 6 0 1 1 12 0v1zm-2 0V7a4 4 0 1 0-8 0v1h8zm-5 6v2h2v-2h-2zm-4 0v2h2v-2H7zm8 0v2h2v-2h-2z" />
         </svg>
       </div>
-      <div>
-        <Tooltip title="Logout">
-          <button
-            className="outline-none focus:outline-none"
-            onClick={modelOpen}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-          </button>
-        </Tooltip>
-      </div>
+      {isLoginPage && (
+        <div>
+          {enableLoginButton ? (
+            <Tooltip title="Login">
+              <Link
+                className="inline-block outline-none focus:outline-none"
+                to="/login"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                  <polyline points="10 17 15 12 10 7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+              </Link>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Logout">
+              <button
+                className="outline-none focus:outline-none"
+                onClick={modelOpen}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </button>
+            </Tooltip>
+          )}
+        </div>
+      )}
 
       <Modal
         modalIsOpen={modalIsOpen}

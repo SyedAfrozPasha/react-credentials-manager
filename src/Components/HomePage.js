@@ -15,6 +15,8 @@ const HomePage = () => {
       <Header
         authDispatch={authContext.authDispatch}
         cardDispatch={cardContext.cardDispatch}
+        enableLoginButton={true}
+        isLoginPage={true}
       />
       <HeroSection
         title="Kreman - Simple Credential Manager"
