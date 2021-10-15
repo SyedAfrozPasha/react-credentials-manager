@@ -1,3 +1,3 @@
-# react-credentials-manager
+# Kreman - A Simple Credentials Manager
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-credentials-manager)
+[Kreman](https://kreman-app.firebaseapp.com)
