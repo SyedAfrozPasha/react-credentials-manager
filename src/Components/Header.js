@@ -12,11 +12,11 @@ function Header({ authDispatch, cardDispatch, enableLoginButton }) {
 
   const handleLogout = () => {
     authDispatch({
-      type: 'LOGOUT_USER'
+      type: 'LOGOUT_USER',
     });
 
     cardDispatch({
-      type: 'CLEAR_DATA'
+      type: 'CLEAR_DATA',
     });
 
     localStorage.setItem('token', null);

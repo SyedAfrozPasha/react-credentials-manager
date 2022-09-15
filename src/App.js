@@ -40,13 +40,13 @@ export default function App() {
     <AuthContext.Provider
       value={{
         authState,
-        authDispatch
+        authDispatch,
       }}
     >
       <CardContext.Provider
         value={{
           cardState,
-          cardDispatch
+          cardDispatch,
         }}
       >
         <Router>

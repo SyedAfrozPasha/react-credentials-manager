@@ -9,7 +9,7 @@ export default function InputField({
   cardID,
   uniqueKey,
   fieldData,
-  cardDispatch
+  cardDispatch,
 }) {
   const [maskInput, setMaskInput] = useState(fieldData.isMasked || false);
   const [enableCopy, setEnableCopy] = useState(true);
@@ -71,8 +71,8 @@ export default function InputField({
         payload: {
           cardID,
           fieldID: fieldData.fieldID,
-          isMasked: false
-        }
+          isMasked: false,
+        },
       });
     } else {
       setMaskInput(true);
@@ -81,8 +81,8 @@ export default function InputField({
         payload: {
           cardID,
           fieldID: fieldData.fieldID,
-          isMasked: true
-        }
+          isMasked: true,
+        },
       });
     }
   };
@@ -106,18 +106,18 @@ export default function InputField({
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true
+      draggable: true,
     });
     cardDispatch({
       type: 'REMOVE_INPUT_FIELD',
       payload: {
         cardID,
-        fieldID: fieldData.fieldID
-      }
+        fieldID: fieldData.fieldID,
+      },
     });
   };
 
-  const modelOpen = e => {
+  const modelOpen = (e) => {
     e.preventDefault();
     setModalIsOpen(true);
   };
@@ -126,11 +126,11 @@ export default function InputField({
     setModalIsOpen(false);
   };
 
-  const updateFieldValue = event => {
+  const updateFieldValue = (event) => {
     setFieldValue(event.target.value);
   };
 
-  const saveFieldValue = event => {
+  const saveFieldValue = (event) => {
     console.log('saveFieldValue:', event.target.value);
     setFieldValue(event.target.value);
     cardDispatch({
@@ -138,16 +138,16 @@ export default function InputField({
       payload: {
         cardID,
         fieldID: fieldData.fieldID,
-        fieldValue: event.target.value
-      }
+        fieldValue: event.target.value,
+      },
     });
   };
 
-  const updateFieldName = event => {
+  const updateFieldName = (event) => {
     setFieldName(event.target.value);
   };
 
-  const saveFieldName = event => {
+  const saveFieldName = (event) => {
     console.log('saveFieldName:', event.target.value);
     setFieldName(event.target.value);
     cardDispatch({
@@ -155,8 +155,8 @@ export default function InputField({
       payload: {
         cardID,
         fieldID: fieldData.fieldID,
-        fieldName: event.target.value
-      }
+        fieldName: event.target.value,
+      },
     });
   };
 
@@ -199,7 +199,7 @@ export default function InputField({
       <div className="relative w-full">
         <div
           className="absolute inset-y-0 right-0 flex items-center px-2"
-          onClick={e => toggleCopy(e, uniqueKey)}
+          onClick={(e) => toggleCopy(e, uniqueKey)}
         >
           <input
             className="hidden"
@@ -250,7 +250,7 @@ export default function InputField({
         </div>
         <div
           className="absolute inset-y-0 right-0 flex items-center px-2 mr-10"
-          onClick={e => togglePassword(e, uniqueKey)}
+          onClick={(e) => togglePassword(e, uniqueKey)}
         >
           <input
             className="hidden password-toggle"

@@ -7,7 +7,7 @@ export default function Modal({
   buttonTitle,
   modalIsOpen,
   onModalClose,
-  onModalButtonAction
+  onModalButtonAction,
 }) {
   const customStyles = {
     content: {
@@ -18,12 +18,12 @@ export default function Modal({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       padding: 0,
-      border: 0
+      border: 0,
       // boxShadow: '0 25px 50px -12px rgba(0, 0, 0, .25)'
     },
     overlay: {
-      backgroundColor: 'rgb(0 0 0 / 75%)'
-    }
+      backgroundColor: 'rgb(0 0 0 / 75%)',
+    },
   };
 
   return (

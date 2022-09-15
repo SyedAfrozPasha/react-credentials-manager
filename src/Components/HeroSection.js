@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeroSection({ title, description1, description2, getNavigation }) {
-  const navigateTool = e => {
+  const navigateTool = (e) => {
     e.preventDefault();
     // getNavigation(e.target);
   };

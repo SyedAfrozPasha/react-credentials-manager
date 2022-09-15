@@ -10,7 +10,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
     inputFile.current.click();
   };
 
-  const handleUpload = event => {
+  const handleUpload = (event) => {
     if (
       event.target &&
       event.target.files &&
@@ -23,7 +23,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
       if (fileExt === 'json') {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], 'UTF-8');
-        fileReader.onload = e => {
+        fileReader.onload = (e) => {
           if (e.target.result) {
             try {
               let importData = {};
@@ -58,8 +58,8 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
               cardDispatch({
                 type: 'ADD_DATA',
                 payload: {
-                  data: importData
-                }
+                  data: importData,
+                },
               });
 
               toast.success('Data Uploaded!', {
@@ -68,7 +68,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: true
+                draggable: true,
               });
             } catch (err) {
               console.log('File upload ERR:', err);
@@ -78,7 +78,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: true
+                draggable: true,
               });
             }
           }
@@ -90,7 +90,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true
+          draggable: true,
         });
       }
     }
@@ -112,7 +112,7 @@ function FileOpertaionButtons({ cardDispatch, isFirstLoad, cardData }) {
       try {
         isEncrypted = true;
         let jsonData = {
-          data: JSON.parse(localStorage.getItem('data'))
+          data: JSON.parse(localStorage.getItem('data')),
         };
         fileData = JSON.stringify(jsonData);
       } catch (err) {}

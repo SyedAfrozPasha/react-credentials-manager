@@ -18,7 +18,7 @@ export default function Login() {
     loginInputRef.current.focus();
   }, []);
 
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
     if (
@@ -28,7 +28,7 @@ export default function Login() {
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
-        minSymbols: 1
+        minSymbols: 1,
       })
     ) {
       try {
@@ -41,8 +41,8 @@ export default function Login() {
         authContext.authDispatch({
           type: 'LOGIN_USER',
           payload: {
-            token
-          }
+            token,
+          },
         });
 
         toast.success('Welcome!', {
@@ -51,7 +51,7 @@ export default function Login() {
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true
+          draggable: true,
         });
 
         if (localStorage.getItem('data') && token) {
@@ -73,8 +73,8 @@ export default function Login() {
           cardContext.cardDispatch({
             type: 'ADD_DATA',
             payload: {
-              data: decryptedData
-            }
+              data: decryptedData,
+            },
           });
         }
       } catch (err) {
@@ -87,13 +87,13 @@ export default function Login() {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true
+        draggable: true,
       });
       localStorage.setItem('isLoggedIn', false);
     }
   };
 
-  const getPassword = e => {
+  const getPassword = (e) => {
     setMPassword(e.target.value);
   };
 

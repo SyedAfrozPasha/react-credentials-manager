@@ -10,7 +10,7 @@ export const authInitializer = (
 
     return {
       token,
-      isLoggedIn
+      isLoggedIn,
     };
     // return JSON.parse(localStorage.getItem('data')) || initialValue;
   } catch (err) {
@@ -19,7 +19,7 @@ export const authInitializer = (
   }
 };
 
-const updateLocalStorage = state => {
+const updateLocalStorage = (state) => {
   let { token, isLoggedIn } = state;
   localStorage.setItem('token', JSON.stringify(token));
   localStorage.setItem('isLoggedIn', isLoggedIn);
@@ -31,7 +31,7 @@ export const authReducer = (state, action) => {
       let login_user_data = {
         ...state,
         token: action.payload.token,
-        isLoggedIn: true
+        isLoggedIn: true,
       };
       updateLocalStorage(login_user_data);
       return login_user_data;
@@ -40,7 +40,7 @@ export const authReducer = (state, action) => {
       let logout_user_data = {
         ...state,
         token: null,
-        isLoggedIn: false
+        isLoggedIn: false,
       };
       updateLocalStorage(logout_user_data);
       return logout_user_data;

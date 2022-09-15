@@ -27,11 +27,11 @@ function AddCardButton({ isFirstLoad, cardDispatch }) {
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true
+      draggable: true,
     });
     cardDispatch({
       type: 'ADD_CARD',
-      payload: generatedRandomString()
+      payload: generatedRandomString(),
     });
   };
 

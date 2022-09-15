@@ -37,11 +37,11 @@ export default function Cards({ cardID }) {
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true
+      draggable: true,
     });
     cardContext.cardDispatch({
       type: 'REMOVE_CARD',
-      payload: cardID
+      payload: cardID,
     });
     setModalIsOpen(false);
   };
@@ -54,7 +54,7 @@ export default function Cards({ cardID }) {
     setModalIsOpen(false);
   };
 
-  const updateCardName = event => {
+  const updateCardName = (event) => {
     setCardName(event.target.value);
   };
 
@@ -65,20 +65,20 @@ export default function Cards({ cardID }) {
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true
+      draggable: true,
     });
     cardContext.cardDispatch({
       type: 'ADD_INPUT_FIELD',
-      payload: { cardID, cardName }
+      payload: { cardID, cardName },
     });
   };
 
-  const saveCardName = event => {
+  const saveCardName = (event) => {
     console.log('onBlurEvent:', event.target.value);
     setCardName(event.target.value);
     cardContext.cardDispatch({
       type: 'UPDATE_CARD',
-      payload: { cardID, cardName: event.target.value }
+      payload: { cardID, cardName: event.target.value },
     });
   };
 
@@ -144,7 +144,7 @@ export default function Cards({ cardID }) {
       </div>
       <div className="flex flex-wrap mt-4">
         {cardData && cardData[cardID] && cardData[cardID].length > 0 ? (
-          cardData[cardID].map(val => {
+          cardData[cardID].map((val) => {
             if (val && val.fieldID) {
               return (
                 <InputField

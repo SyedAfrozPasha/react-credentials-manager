@@ -8,7 +8,7 @@ import {
   CLEAR_DATA,
   ADD_INPUT_FIELD,
   REMOVE_INPUT_FIELD,
-  UPDATE_INPUT_FIELD
+  UPDATE_INPUT_FIELD,
 } from './cardType';
 
 const removeCardLogic = (state, action) => {
@@ -27,10 +27,10 @@ const updateCardLogic = (state, action) => {
     const cardState = { ...state };
     const fieldData = cardState[action.payload.cardID];
     if (fieldData && fieldData.length > 0) {
-      const cardObj = fieldData.map(field => {
+      const cardObj = fieldData.map((field) => {
         let data = {
           ...field,
-          cardName: action.payload.cardName
+          cardName: action.payload.cardName,
         };
         updateLocalStorage(data);
         return data;
@@ -38,7 +38,7 @@ const updateCardLogic = (state, action) => {
 
       let cardData = {
         ...cardState,
-        [action.payload.cardID]: cardObj
+        [action.payload.cardID]: cardObj,
       };
       updateLocalStorage(cardData);
       return cardData;
@@ -58,7 +58,7 @@ const removeInputField = (state, action) => {
 
     if (fieldData && fieldData.length > 0) {
       fieldData.splice(
-        fieldData.findIndex(v => v.fieldID === action.payload.fieldID),
+        fieldData.findIndex((v) => v.fieldID === action.payload.fieldID),
         1
       );
 
@@ -82,7 +82,7 @@ const updateInputFields = (state, action) => {
     const fieldData = cardState[action.payload.cardID];
     if (fieldData && fieldData.length > 0) {
       let objIndex = fieldData.findIndex(
-        obj => obj.fieldID === action.payload.fieldID
+        (obj) => obj.fieldID === action.payload.fieldID
       );
 
       if (
@@ -148,7 +148,7 @@ const authToken = localStorage.getItem('token')
   ? JSON.parse(localStorage.getItem('token'))
   : null;
 
-const updateLocalStorage = state => {
+const updateLocalStorage = (state) => {
   if (authToken) {
     let words = CryptoJS.enc.Base64.parse(authToken);
     let sToken = words ? CryptoJS.enc.Utf8.stringify(words) : null;
@@ -166,7 +166,7 @@ export const cardReducer = (state, action) => {
     case ADD_DATA:
       let add_data = {
         ...state,
-        ...action.payload.data
+        ...action.payload.data,
       };
       updateLocalStorage(add_data);
       return add_data;
@@ -185,9 +185,9 @@ export const cardReducer = (state, action) => {
             fieldName: '',
             cardName: '',
             fieldValue: '',
-            isMasked: false
-          }
-        ]
+            isMasked: false,
+          },
+        ],
       };
       updateLocalStorage(add_card_data);
       return add_card_data;
@@ -209,10 +209,10 @@ export const cardReducer = (state, action) => {
               fieldName: '',
               cardName: action.payload.cardName || '',
               fieldValue: '',
-              isMasked: false
-            }
-          ]
-        ]
+              isMasked: false,
+            },
+          ],
+        ],
       };
       updateLocalStorage(returnObj);
       return returnObj;
